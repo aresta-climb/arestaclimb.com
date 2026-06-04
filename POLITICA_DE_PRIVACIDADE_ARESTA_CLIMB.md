@@ -1,5 +1,7 @@
 # Política de Privacidade - Aresta Climb: Croquis
 
+**Última atualização: 03/06/2026**
+
 O aplicativo **Aresta Climb: Croquis** foi construído como um aplicativo Gratuito. Este SERVIÇO é fornecido sem custos e destina-se a ser utilizado no estado em que se encontra.
 
 Esta página é usada para informar os visitantes sobre nossas políticas relativas à coleta, uso e divulgação de Informações Pessoais, caso alguém decida usar o nosso Serviço.
@@ -16,6 +18,16 @@ O Aresta Climb foi projetado para funcionar primordialmente de forma **offline**
 
 Queremos informar que, sempre que você usar nosso Serviço e em caso de erro no aplicativo, podemos coletar dados e informações (através de produtos de terceiros, se aplicável) no seu telefone, chamados de Log Data. Esses Dados de Registro podem incluir informações como o endereço de Protocolo de Internet ("IP") do seu dispositivo, nome do dispositivo, versão do sistema operacional, a configuração do aplicativo ao utilizar nosso Serviço, a hora e a data do seu uso do Serviço e outras estatísticas estritamente voltadas para a correção de bugs.
 
+## Serviços de Terceiros
+
+O aplicativo utiliza serviços de terceiros que podem coletar dados de forma anônima para gerar estatísticas de uso e funcionamento, sem qualquer capacidade de identificar você pessoalmente. Link para a política de privacidade dos provedores de serviços terceirizados usados pelo aplicativo:
+
+*   [Apple](https://www.apple.com/legal/privacy/)
+*   [Google Play Services](https://policies.google.com/privacy)
+*   [Google Analytics for Firebase](https://firebase.google.com/policies/analytics)
+*   [Firebase Crashlytics](https://firebase.google.com/support/privacy)
+*   [Firebase Remote Config](https://firebase.google.com/support/privacy)
+
 ## Links para Outros Sites
 
 Este Serviço pode conter links para outros sites. Se você clicar em um link de terceiros, será direcionado para esse site. Observe que esses sites externos não são operados por nós. Portanto, aconselhamos fortemente que você analise a Política de Privacidade desses sites. Não temos controle e não assumimos nenhuma responsabilidade pelo conteúdo, políticas de privacidade ou práticas de sites ou serviços de terceiros.
@@ -28,8 +40,17 @@ Esses Serviços não se dirigem a menores de 13 anos. Não coletamos intencional
 
 Podemos atualizar nossa Política de Privacidade de tempos em tempos. Portanto, aconselhamos que você revise esta página periodicamente para quaisquer alterações. Iremos notificá-lo de quaisquer alterações postando a nova Política de Privacidade nesta página.
 
-Esta política é efetiva a partir de 01/06/2026.
+## Retenção de Dados
+
+Nós reteremos os dados coletados apenas pelo tempo necessário para cumprir os propósitos para os quais foram coletados, como fornecer o Serviço, melhorar a experiência do usuário e cumprir com obrigações legais. Os dados analíticos e de relatórios de falhas (que já nascem anônimos na coleta) são retidos pelas ferramentas de terceiros (como o Firebase) de acordo com suas políticas padrão (geralmente variando de 90 dias a 14 meses), sendo permanentemente excluídos após esse período.
+
+## Seus Direitos (LGPD)
+
+Em conformidade com a Lei Geral de Proteção de Dados (LGPD), mesmo que nosso aplicativo colete primordialmente dados de forma anônima, você tem o direito de:
+* Solicitar a confirmação da existência de tratamento de dados;
+* Solicitar o acesso ou a exclusão dos dados coletados pelos serviços terceirizados através das configurações do seu próprio dispositivo (como redefinir o ID de Publicidade);
+* Revogar o consentimento para a coleta de dados de uso no futuro (geralmente desinstalando o aplicativo).
 
 ## Contato
 
-Se você tiver alguma dúvida ou sugestão sobre nossa Política de Privacidade, não hesite em nos contatar através do repositório do projeto.
+Se você tiver alguma dúvida, sugestão ou quiser exercer seus direitos sobre nossa Política de Privacidade, não hesite em nos contatar enviando um e-mail para: arestaclimbapps@googlegroups.com.
