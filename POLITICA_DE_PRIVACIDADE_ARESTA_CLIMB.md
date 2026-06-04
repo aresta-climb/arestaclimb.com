@@ -1,6 +1,6 @@
 # Política de Privacidade - Aresta Climb: Croquis
 
-**Última atualização: 03/06/2026**
+**Última atualização: 04/06/2026**
 
 O aplicativo **Aresta Climb: Croquis** foi construído como um aplicativo Gratuito. Este SERVIÇO é fornecido sem custos e destina-se a ser utilizado no estado em que se encontra.
 
@@ -12,7 +12,7 @@ Se você optar por usar nosso Serviço, você concorda com a coleta e o uso de i
 
 O Aresta Climb foi projetado para funcionar primordialmente de forma **offline**. Para uma melhor experiência durante o uso de nosso Serviço, podemos exigir que você nos forneça certas informações de identificação pessoal. No entanto, é importante ressaltar que:
 
-* **Coleta de Dados, Analytics e Publicidade:** O aplicativo coleta dados de interação e métricas de uso de forma **totalmente anônima**. Esses dados são utilizados para entendermos como o app é utilizado, permitindo a sua melhoria contínua, e também podem ser utilizados ou compartilhados com parceiros para fins de **publicidade** (como otimizar campanhas, exibir anúncios relevantes ou analisar engajamento). Isso pode incluir informações sobre telas acessadas e cliques na interface. **Nenhum desses dados é vinculado à sua identidade**: não coletamos seu nome, e-mail ou qualquer informação que possa identificá-lo pessoalmente. Além disso, quando você se conecta à internet para baixar novos "croquis", seu endereço de IP pode ser registrado temporariamente pelos servidores (padrão de funcionamento da internet), sem qualquer vínculo com sua identidade.
+* **Coleta de Dados, Analytics e Publicidade:** O aplicativo coleta dados de interação e métricas de uso de forma **totalmente anônima**. Esses dados são utilizados para entendermos como o app é utilizado, permitindo a sua melhoria contínua, e também podem ser utilizados ou compartilhados com parceiros para fins de **publicidade** (como otimizar campanhas, exibir anúncios relevantes ou analisar engajamento). Isso pode incluir informações sobre telas acessadas e cliques na interface. **Nenhum desses dados é vinculado à sua identidade**: não coletamos seu nome, e-mail ou qualquer informação que possa identificá-lo pessoalmente. Além disso, o seu endereço de IP é registrado temporariamente pelos servidores (padrão de funcionamento da internet) e pode ser utilizado pelas ferramentas de analytics para estimar a sua localização aproximada (como país e cidade), sem acessar o GPS do seu dispositivo e sem qualquer vínculo com sua identidade.
 
 ## Log Data (Dados de Registro)
 
