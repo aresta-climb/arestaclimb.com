@@ -1,0 +1,20 @@
+name: Notify App Repo
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'TERMOS_DE_USO_ARESTA_CLIMB.md'
+      - 'POLITICA_DE_PRIVACIDADE_ARESTA_CLIMB.md'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PAT_ARESTA_APP }}
+          repository: aresta-climb/aresta_app
+          event-type: update-legal-terms
