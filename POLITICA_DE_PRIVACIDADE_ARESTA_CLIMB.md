@@ -55,4 +55,4 @@ Se você tiver alguma dúvida, sugestão ou quiser exercer seus direitos sobre n
 
 ## Vigência
 
-Esta política entra em vigor a partir de 04 de Junho de 2026.
+Esta política entra em vigor a partir de 05 de Junho de 2026.
