@@ -1,0 +1,34 @@
+name: Notify Update in Terms 
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'TERMOS_DE_USO_ARESTA_CLIMB.md'
+      - 'POLITICA_DE_PRIVACIDADE_ARESTA_CLIMB.md'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Github App token
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+          owner: aresta-climb
+
+      - name: Repository Dispatch 
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          repository: aresta-climb/aresta_app
+          event-type: update-legal-terms
+          client-payload: |
+            {
+              "sha": "${{ github.sha }}",
+              "ref": "${{ github.ref }}",
+              "actor": "${{ github.actor }}"
+            }

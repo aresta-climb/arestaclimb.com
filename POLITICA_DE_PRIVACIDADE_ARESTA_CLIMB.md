@@ -1,7 +1,5 @@
 # Política de Privacidade - Aresta Climb: Croquis
 
-**Última atualização: 04/06/2026**
-
 O aplicativo **Aresta Climb: Croquis** foi construído como um aplicativo Gratuito. Este SERVIÇO é fornecido sem custos e destina-se a ser utilizado no estado em que se encontra.
 
 Esta página é usada para informar os visitantes sobre nossas políticas relativas à coleta, uso e divulgação de Informações Pessoais, caso alguém decida usar o nosso Serviço.
@@ -54,3 +52,7 @@ Em conformidade com a Lei Geral de Proteção de Dados (LGPD), mesmo que nosso a
 ## Contato
 
 Se você tiver alguma dúvida, sugestão ou quiser exercer seus direitos sobre nossa Política de Privacidade, não hesite em nos contatar enviando um e-mail para: arestaclimbapps@googlegroups.com.
+
+## Vigência
+
+Esta política entra em vigor a partir de 04 de Junho de 2026.
