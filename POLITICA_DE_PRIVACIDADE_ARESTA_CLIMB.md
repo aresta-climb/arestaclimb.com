@@ -1,6 +1,6 @@
-# Política de Privacidade - Aresta Climb: Croquis
+# Política de Privacidade - Aresta Climb
 
-O aplicativo **Aresta Climb: Croquis** foi construído como um aplicativo Gratuito. Este SERVIÇO é fornecido sem custos e destina-se a ser utilizado no estado em que se encontra.
+O aplicativo **Aresta Climb** foi construído como um aplicativo Gratuito. Este SERVIÇO é fornecido sem custos e destina-se a ser utilizado no estado em que se encontra.
 
 Esta página é usada para informar os visitantes sobre nossas políticas relativas à coleta, uso e divulgação de Informações Pessoais, caso alguém decida usar o nosso Serviço.
 
