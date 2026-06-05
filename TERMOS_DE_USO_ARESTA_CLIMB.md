@@ -1,6 +1,6 @@
-Última atualização: 04 de Junho de 2026
-
 ### TERMO DE RESPONSABILIDADE E ACEITAÇÃO DE RISCOS
+
+Última atualização: 04 de Junho de 2026
 
 Bem-vindo à Aresta Climb. A Aresta Climb é um aplicativo colaborativo que cataloga picos de escalada para facilitar o acesso à informação, centralizando croquis e dados úteis para a comunidade.
 
