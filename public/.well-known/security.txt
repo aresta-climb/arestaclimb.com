@@ -1,0 +1,4 @@
+Contact: mailto:contato@arestaclimb.com
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: pt-BR, en
+Canonical: https://arestaclimb.com/.well-known/security.txt
