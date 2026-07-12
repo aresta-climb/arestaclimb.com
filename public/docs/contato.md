@@ -11,10 +11,11 @@ Faça parte da nossa comunidade no WhatsApp para trocar ideias com outros escala
 **[Entrar na Comunidade do WhatsApp](https://chat.whatsapp.com/Ip28rjQj4YbHgPgtN5Arcv)**
 
 ## Suporte Técnico e Bugs
-Se você encontrou um bug ou tem uma sugestão de funcionalidade, a melhor forma de nos avisar é nos mandando um e-mail ou mensagem na comunidade com:
-- O modelo do seu celular (ex: iPhone 13, Galaxy S22)
-- A versão do sistema (ex: iOS 17)
-- Descrição detalhada do que aconteceu
+Se você encontrou um problema enquanto usa o Aresta Climb, a **melhor forma de nos avisar é usando o ícone de bug (inseto 🐞) dentro do próprio aplicativo**. 
+
+Ao reportar o erro por lá, o aplicativo nos envia automaticamente um relatório com os dados técnicos direto da tela onde você está, o que nos ajuda a resolver o problema muito mais rápido!
+
+Caso o aplicativo não esteja abrindo, você também pode nos mandar um e-mail ou mensagem na comunidade.
 
 ## Links Úteis
 - [Termos de Uso](/termos-de-uso)
