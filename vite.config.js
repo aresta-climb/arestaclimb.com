@@ -8,7 +8,8 @@ export default defineConfig({
         cla: resolve(__dirname, 'cla.html'),
         termosDeUso: resolve(__dirname, 'termos-de-uso.html'),
         politicaDePrivacidade: resolve(__dirname, 'politica-de-privacidade.html'),
-        privacidadeContribuidores: resolve(__dirname, 'privacidade-contribuidores.html')
+        privacidadeContribuidores: resolve(__dirname, 'privacidade-contribuidores.html'),
+        contato: resolve(__dirname, 'contato.html')
       }
     }
   },
