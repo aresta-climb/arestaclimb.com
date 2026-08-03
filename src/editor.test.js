@@ -26,7 +26,7 @@ describe('editor.js - Landing Page Logic', () => {
     expect(thankYouMsg.style.display).toBe('block');
     
     // Verifica se o log foi disparado (simulando rastreamento)
-    expect(console.log).toHaveBeenCalledWith('Download do Aresta Editor iniciado!');
+    expect(console.log).toHaveBeenCalledWith('Download do Editor Aresta iniciado!');
   });
 
   it('deve chamar setupDownloadButton quando o DOMContentLoaded for disparado', () => {

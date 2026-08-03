@@ -10,7 +10,7 @@ export function setupDownloadButton() {
       thankYouMsg.style.display = 'block';
       
       // Prepara o rastreamento (ex: Google Analytics) se estiver disponível no futuro
-      console.log('Download do Aresta Editor iniciado!');
+      console.log('Download do Editor Aresta iniciado!');
     });
   }
 }
