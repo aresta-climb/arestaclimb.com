@@ -15,10 +15,13 @@ O site foi construído com foco em **performance extrema, tipografia moderna e i
 ## 🛠️ Arquitetura (MPA)
 
 Este projeto usa a arquitetura de Múltiplas Páginas (MPA) configurada no Vite. As páginas disponíveis (pontos de entrada) são:
+- `/editor` ➔ Landing page e download do Editor Aresta (`editor.html`)
 - `/cla` ➔ Renderiza `cla.md`
 - `/termos-de-uso` ➔ Renderiza `termos-de-uso.md`
 - `/politica-de-privacidade` ➔ Renderiza `politica-de-privacidade.md`
+- `/politica-de-privacidade-editor` ➔ Renderiza `politica-de-privacidade-editor.md`
 - `/privacidade-contribuidores` ➔ Renderiza `privacidade-contribuidores.md`
+- `/contato` ➔ Renderiza `contato.md`
 
 Os documentos de origem ficam na pasta `/public/docs/`. O arquivo JavaScript `src/main.js` intercepta as requisições e busca o markdown de forma assíncrona para montar o documento renderizado na tela.
 

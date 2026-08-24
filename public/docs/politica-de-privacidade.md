@@ -57,6 +57,7 @@ provedores de serviços terceirizados usados pelo aplicativo:
 - [Google Analytics for Firebase](https://firebase.google.com/policies/analytics)
 - [Firebase Crashlytics](https://firebase.google.com/support/privacy)
 - [Firebase Remote Config](https://firebase.google.com/support/privacy)
+- [Firebase App Check](https://firebase.google.com/support/privacy)
 
 ## Links para Outros Sites
 
@@ -114,4 +115,4 @@ para: **contato@arestaclimb.com**.
 
 ## Vigência
 
-Esta política entra em vigor a partir de 25 de Junho de 2026.
+Esta política entra em vigor a partir de 08 de Agosto de 2026.

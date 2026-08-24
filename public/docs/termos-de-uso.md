@@ -1,6 +1,6 @@
 ### TERMOS DE USO E ACEITAÇÃO DE RISCOS
 
-Bem-vindo à Aresta Climb. A Aresta Climb é um aplicativo colaborativo que
+Bem-vindo ao Aresta Climb. O Aresta Climb é um aplicativo colaborativo que
 cataloga picos de escalada para facilitar o acesso à informação, centralizando
 croquis e dados úteis para a comunidade.
 
@@ -26,14 +26,14 @@ segurança, bem como a ciência sobre o histórico de regrampeações do local, 
 responsabilidade exclusiva do escalador antes de iniciar a via.
 
 **4. Uso da Informação:** O usuário reconhece que a interpretação e a navegação
-baseadas nos dados da Aresta Climb são feitas por sua própria conta e risco. Os
+baseadas nos dados do Aresta Climb são feitas por sua própria conta e risco. Os
 desenvolvedores e mantenedores do aplicativo estão isentos de qualquer
 responsabilidade civil ou criminal por acidentes, danos a equipamentos ou
 resgates decorrentes do uso destas informações.
 
-**5. Política de Privacidade:** Ao utilizar a Aresta Climb, você também concorda
+**5. Política de Privacidade:** Ao utilizar o Aresta Climb, você também concorda
 com a nossa Política de Privacidade, que detalha a forma como lidamos com a
 coleta anônima de dados de uso e permissões locais. Você pode acessá-la
 integralmente lendo a nossa [Política de Privacidade](/politica-de-privacidade).
 
-**6. Vigência:** Estes termos entram em vigor a partir de 25 de Junho de 2026.
+**6. Vigência:** Estes termos entram em vigor a partir de 08 de Agosto de 2026.
