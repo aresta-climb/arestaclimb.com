@@ -1,6 +1,6 @@
 # Política de Privacidade do Editor Aresta Climb
 
-**Última atualização:** 25 de Agosto de 2026
+**Última atualização:** 27 de Agosto de 2026
 
 O **Editor Aresta Climb** é um aplicativo de código aberto voltado para a criação, edição e contribuição colaborativa de croquis de escalada e dados geográficos. A sua privacidade e a transparência no tratamento das suas informações são prioridades para nós.
 
@@ -10,7 +10,7 @@ Esta política descreve de forma clara como os seus dados são coletados, utiliz
 
 ## 1. Informações Coletadas e Finalidade
 
-O Editor Aresta Climb coleta apenas os dados estritamente necessários para viabilizar a autenticação do usuário e a atribuição de autoria nas contribuições de croquis.
+O Editor Aresta Climb coleta apenas os dados estritamente necessários para viabilizar a autenticação do usuário, atribuição de autoria e envio silencioso de relatórios de falhas técnicas (crash reporting).
 
 ### a) Dados de Identificação Pessoal (Nome e E-mail)
 Ao utilizar os recursos de login e submissão de sugestões de croquis, o aplicativo coleta:
@@ -36,13 +36,21 @@ As únicas comunicações realizadas pelo aplicativo ocorrem com serviços de in
 
 - **Supabase (Backend de Autenticação e Proxy):** Utilizado para validar a identidade do usuário, gerenciar sessões e intermediar a criação segura de Pull Requests.
 - **GitHub:** Utilizado para hospedagem do repositório público de dados, sincronização de branches e abertura de Pull Requests com os dados de croquis.
+- **Sentry (Monitoramento de Estabilidade e Telemetria de Falhas):** Utilizado para recepção e agregação automática de relatórios de erros não tratados e exceções críticas, viabilizando a correção rápida de problemas no software pelos desenvolvedores. Para mais informações sobre o tratamento de dados pela plataforma, consulte a [Política de Privacidade do Sentry](https://sentry.io/privacy/).
 - **Comunicação Local (Rede Wi-Fi):** O aplicativo permite sincronização direta com o app móvel Aresta Climb na sua rede local privada. Nenhum dado desse fluxo transita por servidores externos.
 
 ---
 
-## 3. Telemetria e Rastreamento
+## 3. Telemetria Silenciosa, Diagnóstico de Falhas e Sanitização Universal
 
-O Editor Aresta Climb **não realiza telemetria**, não possui rastreadores de comportamento (*trackers*), pixels ou cookies de análise de uso. Não monitoramos quais croquis você visualiza localmente ou sua frequência de uso.
+Para garantir a estabilidade contínua do Editor Aresta Climb em ambiente de produção Windows, o aplicativo conta com telemetria 100% automática e silenciosa integrada ao Sentry:
+
+1. **Relatórios Automáticos de Falha (*Crash Reports*):** Quando ocorre uma exceção inesperada ou encerramento anômalo do aplicativo, um relatório técnico de diagnóstico é compilado e transmitido silenciosamente aos desenvolvedores em segundo plano.
+2. **Sanitização Universal de Caminhos Locais:** Todos os relatórios passam por um filtro de higienização estrita antes do envio: qualquer caminho de arquivo absoluto do sistema operacional que contenha pastas pessoais ou nomes de usuário é automaticamente ofuscado e substituído por variáveis genéricas (como `%appdata%`, `%localappdata%`, `%userprofile%` ou `%temp%`).
+3. **Diário de Comandos e Anonimização de Mídias:** Para permitir que os desenvolvedores reproduzam com exatidão a sequência de ações que culminou em uma falha técnica, o histórico de comandos de edição é enviado como anexo de diagnóstico. Todas as fotos, mapas e arquivos binários incluídos nesse histórico são previamente convertidos em imagens sólidas dummy (WebP de dimensões idênticas mas sem o conteúdo visual real do usuário), garantindo a proteção total das fotos em rascunho.
+4. **Sem Rastreamento Comercial:** O Editor **não** possui rastreadores de publicidade, não traça perfis comportamentais e não monetiza qualquer informação do usuário.
+
+O processamento e a infraestrutura dos relatórios técnicos de falhas obedecem aos termos da [Política de Privacidade do Sentry](https://sentry.io/privacy/).
 
 ---
 
