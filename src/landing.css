@@ -1173,18 +1173,18 @@ html[data-theme="dark"] .section-offline {
 
 
 .window-header-bar {
-  height: 38px;
+  height: 26px;
   background: #1c1d18;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  gap: 8px;
+  padding: 0 12px;
+  gap: 6px;
 }
 
 .window-dot {
-  width: 11px;
-  height: 11px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
 }
 
@@ -1193,9 +1193,12 @@ html[data-theme="dark"] .section-offline {
 .dot-green { background: #27c93f; }
 
 .window-title {
-  margin-left: 12px;
-  font-size: 0.78rem;
+  margin-left: 8px;
+  font-size: 0.68rem;
   color: #8e897e;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   font-family: monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
