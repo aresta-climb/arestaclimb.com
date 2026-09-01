@@ -39,4 +39,26 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(html).toContain('id="btn-android"');
     expect(html).toContain('id="themeToggle"');
   });
+
+  it('todas as páginas HTML devem conter tags Open Graph para preview em redes e WhatsApp', () => {
+    const pages = [
+      'index.html',
+      'app.html',
+      'download.html',
+      'editor.html',
+      'termos-de-uso.html',
+      'politica-de-privacidade.html',
+      'politica-de-privacidade-editor.html',
+      'privacidade-contribuidores.html',
+      'contato.html'
+    ];
+
+    pages.forEach(p => {
+      const html = fs.readFileSync(p, 'utf8');
+      expect(html).toContain('property="og:image"');
+      expect(html).toContain('https://arestaclimb.com/og.png');
+      expect(html).toContain('property="og:title"');
+      expect(html).toContain('property="og:description"');
+    });
+  });
 });
