@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
   <head>
+  <script>try{const t=localStorage.getItem('aresta-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aresta Climb - Termos de Uso</title>
+    <title>Aresta Climb — Termos de Uso</title>
     <link rel="icon" type="image/png" href="/assets/logo_app.png">
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <div class="background-mesh"></div>
     <header class="topbar">
       <div class="topbar-content">
-        <div class="brand">
-          <img src="/assets/logo_app.png" alt="Aresta Logo" width="32" height="32" style="border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-          <h1>Aresta Climb</h1>
+        <a href="/" class="brand" aria-label="Aresta Climb - Início">
+          <img src="/assets/logo_app.png" alt="Aresta Logo" width="32" height="32" />
+          <span>ARESTA CLIMB</span>
+        </a>
+        <div class="topbar-actions">
+          <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro e escuro">◐</button>
+          <a href="/" class="btn-nav-back">Voltar ao Início</a>
         </div>
       </div>
     </header>
+
     <div class="app-container">
       <main class="content-area glass-panel" data-doc="/docs/termos-de-uso.md">
         <div id="markdown-container" class="markdown-body">
@@ -27,6 +29,18 @@
         </div>
       </main>
     </div>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <span>© 2026 Aresta Climb · Liberdade com responsabilidade no outdoor.</span>
+        <div>
+          <a href="/termos-de-uso" style="margin-right: 16px;">Termos</a>
+          <a href="/politica-de-privacidade" style="margin-right: 16px;">Privacidade</a>
+          <a href="/editor">Editor</a>
+        </div>
+      </div>
+    </footer>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 import './style.css';
+import './theme.js';
 import { loadAndRenderMarkdown } from './markdownRenderer.js';
 
 document.addEventListener('DOMContentLoaded', () => {

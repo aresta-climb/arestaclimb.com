@@ -1,51 +1,61 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
   <head>
+    <script>try{const t=localStorage.getItem('aresta-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aresta Climb - Editor de Croquis</title>
-    <!-- Importa o CSS principal e o CSS específico do editor -->
+    <title>Aresta Climb — Editor Desktop na Microsoft Store</title>
+    <meta name="description" content="O Editor Aresta é a ferramenta desktop oficial para diagramar, traçar vias vetoriais sobre fotos de alta resolução e publicar croquis no app Aresta Climb. Disponível na Microsoft Store.">
+    <link rel="icon" type="image/png" href="/assets/logo_app.png">
     <link rel="stylesheet" href="/src/editor.css" />
   </head>
   <body>
-    <!-- Background animado -->
-    <div class="background-glow"></div>
-
     <!-- Header / Navbar -->
     <header class="topbar">
-      <a href="/" class="brand">
-        <img src="/assets/logo_app.png" alt="Aresta Logo" width="32" height="32" />
-        <h1>Aresta Climb</h1>
-      </a>
+      <div class="topbar-content">
+        <a href="/" class="brand" aria-label="Aresta Climb - Início">
+          <img src="/assets/logo_app.png" alt="Aresta Logo" width="32" height="32" />
+          <span>ARESTA CLIMB</span>
+        </a>
+        <div class="topbar-actions">
+          <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro e escuro">◐</button>
+          <a href="/" class="btn-nav-back">Voltar ao Início</a>
+        </div>
+      </div>
     </header>
 
     <!-- Seção Principal (Hero) -->
     <main class="hero">
-      <h2>O poder de desenhar croquis de escalada totalmente em suas mãos.</h2>
-      <p>O <strong>Editor Aresta</strong> é a ferramenta definitiva para extrair, diagramar e compilar croquis interativos, totalmente integrado ao app Aresta Climb.</p>
+      <div class="hero-badge">FERRAMENTA DESKTOP OFICIAL</div>
+      <h2>O poder de desenhar croquis de escalada em suas mãos.</h2>
+      <p>O <strong>Editor Aresta</strong> é a ferramenta desktop definitiva para extrair, diagramar e compilar croquis interativos com traçado vetorial sobre fotos, totalmente integrado ao app Aresta Climb.</p>
       
-      <a href="https://serving.arestaclimb.com/editor/EditorAresta.exe" id="download-btn" class="btn-download" download>
-        <svg xmlns="http://www.w3.org/.svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-        Baixar para Windows
-      </a>
+      <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+        <a href="https://apps.microsoft.com/detail/9N6CQNH78WN8" target="_blank" rel="noopener" id="download-btn" class="store-badge-ms" aria-label="Obter na Microsoft Store">
+          <svg viewBox="0 0 24 24" width="28" height="28" style="flex-shrink: 0;"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#00a4ef" d="M1 13h10v10H1z"/><path fill="#7fba00" d="M13 1h10v10H13z"/><path fill="#ffb900" d="M13 13h10v10H13z"/></svg>
+          <span class="store-badge-text" style="text-align: left;">
+            <small style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; display: block;">Obter na</small>
+            <strong style="font-size: 15px; font-weight: 800;">Microsoft Store</strong>
+          </span>
+        </a>
+      </div>
       
-      <div id="thank-you-msg">Obrigado por baixar o Editor Aresta! O download começará em instantes.</div>
-      <div class="version-info">Requer Windows 10/11 64-bits. Instalador embutido.</div>
+      <div class="version-info">Gratuito na Microsoft Store para Windows 10 e 11 (64-bits).</div>
     </main>
 
     <!-- Funcionalidades -->
     <section class="features">
       <div class="feature-card">
         <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8"/><path d="M10 19v-3.96 3.15"/><path d="M7 19h5"/><rect width="6" height="10" x="16" y="12" rx="2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8"/><path d="M10 19v-3.96 3.15"/><path d="M7 19h5"/><rect width="6" height="10" x="16" y="12" rx="2"/></svg>
         </div>
         <h3>Edição em Tempo Real</h3>
-        <p>O editor se conecta com o seu aplicativo de celular para você visualizar as mudanças no croqui exatamente como elas aparecerão na tela, enquanto você as faz no computador.</p>
+        <p>O editor se conecta com o aplicativo de celular para você visualizar as mudanças no croqui exatamente como elas aparecerão na tela, enquanto você desenha no computador.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.973"/><path d="m13 12-3 5h4l-3 5"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.973"/><path d="m13 12-3 5h4l-3 5"/></svg>
         </div>
         <h3>Distribuído em Segundos</h3>
         <p>Modificações nos croquis, assim que aprovadas pela curadoria, são disponibilizadas para atualização de todos os usuários do app Aresta Climb em menos de um minuto.</p>
@@ -53,15 +63,21 @@
 
       <div class="feature-card">
         <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
         </div>
-        <h3>Micro-melhorias</h3>
-        <p>Acabou a era dos PDFs lançados uma vez por ano. Abriu uma via nova? Adicione ao croqui e distribua. Corrigiu o grau de um boulder? Publique instantaneamente para toda a comunidade.</p>
+        <h3>Micro-melhorias Contínuas</h3>
+        <p>Acabou a era dos PDFs lançados uma vez por ano. Abriu uma via nova? Adicione ao croqui e distribua. Corrigiu o grau de um boulder? Publique instantaneamente para a comunidade.</p>
       </div>
     </section>
 
-    <footer>
-      &copy; 2026 Aresta Climb. Todos os direitos reservados.
+    <footer class="site-footer">
+      <div class="footer-content" style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <span>© 2026 Aresta Climb · Todos os direitos reservados.</span>
+        <div>
+          <a href="/politica-de-privacidade-editor" style="margin-right: 16px;">Privacidade do Editor</a>
+          <a href="/termos-de-uso">Termos</a>
+        </div>
+      </div>
     </footer>
 
     <script type="module" src="/src/editor.js"></script>

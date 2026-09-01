@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 temp
+scratch
+coverage

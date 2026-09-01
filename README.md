@@ -1,7 +1,7 @@
 # Aresta Climb - Hub Central & Documentação Legal
 
 Bem-vindo ao repositório do site central do ecossistema **Aresta Climb**.
-Este repositório é responsável por servir a infraestrutura web de documentação pública e acordos legais, como o Contrato de Licença de Contribuidor (CLA), Termos de Uso e Políticas de Privacidade.
+Este repositório é responsável por servir a infraestrutura web de documentação pública e acordos legais, Termos de Uso, Políticas de Privacidade e Smart Hub de Download com QR Code (adotamos DCO para contribuições).
 
 O site foi construído com foco em **performance extrema, tipografia moderna e integração limpa com Markdown**.
 
@@ -15,15 +15,16 @@ O site foi construído com foco em **performance extrema, tipografia moderna e i
 ## 🛠️ Arquitetura (MPA)
 
 Este projeto usa a arquitetura de Múltiplas Páginas (MPA) configurada no Vite. As páginas disponíveis (pontos de entrada) são:
-- `/editor` ➔ Landing page e download do Editor Aresta (`editor.html`)
-- `/cla` ➔ Renderiza `cla.md`
+- `/` ➔ Landing page oficial do app Aresta Climb (`index.html`)
+- `/app` (e `/download`) ➔ Smart Redirect para App Store / Google Play e Hub QR Code (`app.html`)
+- `/editor` ➔ Landing page e download do Editor Aresta Desktop (`editor.html`)
 - `/termos-de-uso` ➔ Renderiza `termos-de-uso.md`
 - `/politica-de-privacidade` ➔ Renderiza `politica-de-privacidade.md`
 - `/politica-de-privacidade-editor` ➔ Renderiza `politica-de-privacidade-editor.md`
 - `/privacidade-contribuidores` ➔ Renderiza `privacidade-contribuidores.md`
 - `/contato` ➔ Renderiza `contato.md`
 
-Os documentos de origem ficam na pasta `/public/docs/`. O arquivo JavaScript `src/main.js` intercepta as requisições e busca o markdown de forma assíncrona para montar o documento renderizado na tela.
+Os documentos legais de origem ficam na pasta `/public/docs/`. O arquivo JavaScript `src/main.js` intercepta as requisições e busca o markdown de forma assíncrona para montar o documento renderizado na tela. A landing page principal e todas as páginas utilizam o Design System unificado com suporte nativo a Dark/Light mode (`src/landing.css`, `src/landing.js`, `src/style.css` e `src/editor.css`).
 
 ## 💻 Como Rodar Localmente
 

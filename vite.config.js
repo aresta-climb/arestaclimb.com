@@ -5,12 +5,14 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        cla: resolve(__dirname, 'cla.html'),
+        index: resolve(__dirname, 'index.html'),
         termosDeUso: resolve(__dirname, 'termos-de-uso.html'),
         politicaDePrivacidade: resolve(__dirname, 'politica-de-privacidade.html'),
         politicaDePrivacidadeEditor: resolve(__dirname, 'politica-de-privacidade-editor.html'),
         privacidadeContribuidores: resolve(__dirname, 'privacidade-contribuidores.html'),
         contato: resolve(__dirname, 'contato.html'),
+        app: resolve(__dirname, 'app.html'),
+        download: resolve(__dirname, 'download.html'),
         editor: resolve(__dirname, 'editor.html')
       }
     }
