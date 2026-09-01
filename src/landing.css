@@ -820,17 +820,16 @@ html[data-theme="dark"] .section-offline {
 }
 
 .editor-frame {
-  background: #20211d;
-  padding: 10px;
-  border-radius: 24px;
-  box-shadow: var(--shadow);
-  border: 1px solid #3c3d34;
+  background: #1c1d18;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
   overflow: hidden;
+  box-shadow: var(--shadow);
 }
 
 .editor-frame img {
   width: 100%;
-  border-radius: 16px;
+  height: auto;
   display: block;
 }
 
@@ -1172,3 +1171,31 @@ html[data-theme="dark"] .section-offline {
   .footer-links-grid { gap: 32px; }
 }
 
+
+.window-header-bar {
+  height: 38px;
+  background: #1c1d18;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 8px;
+}
+
+.window-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.window-title {
+  margin-left: 12px;
+  font-size: 0.78rem;
+  color: #8e897e;
+  letter-spacing: 0.03em;
+  font-family: monospace;
+}
