@@ -1171,3 +1171,32 @@ html[data-theme="dark"] .section-offline {
   .store-badge { width: 100%; justify-content: center; }
   .footer-links-grid { gap: 32px; }
 }
+
+/* macOS Window Header Bar */
+.window-header-bar {
+  height: 36px;
+  background: #1c1d18;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 8px;
+}
+
+.window-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.window-title {
+  margin-left: 10px;
+  font-size: 0.76rem;
+  color: #8e897e;
+  letter-spacing: 0.03em;
+  font-family: monospace;
+}
