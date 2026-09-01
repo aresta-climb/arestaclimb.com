@@ -251,18 +251,45 @@ a {
 .editor-showcase-window {
   max-width: var(--container-max);
   margin: 0 auto 80px;
-  background: transparent;
+  background: #1c1d18;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow);
 }
 
+.window-header-bar {
+  height: 38px;
+  background: #1c1d18;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 8px;
+}
+
+.window-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.window-title {
+  margin-left: 12px;
+  font-size: 0.78rem;
+  color: #8e897e;
+  letter-spacing: 0.03em;
+  font-family: monospace;
+}
+
 .editor-showcase-window img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: calc(var(--radius-md) - 1px);
 }
 
 /* Features Grid */
