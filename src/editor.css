@@ -251,18 +251,18 @@ a {
 .editor-showcase-window {
   max-width: var(--container-max);
   margin: 0 auto 80px;
-  background: var(--surface);
+  background: transparent;
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow);
-  position: relative;
 }
 
 .editor-showcase-window img {
   width: 100%;
   height: auto;
   display: block;
+  border-radius: calc(var(--radius-md) - 1px);
 }
 
 /* Features Grid */
