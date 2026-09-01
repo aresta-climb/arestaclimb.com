@@ -1,6 +1,6 @@
 # Política de Privacidade do Editor Aresta Climb
 
-**Última atualização:** 27 de Agosto de 2026
+**Última atualização:** 1 de Setembro de 2026
 
 O **Editor Aresta Climb** é um aplicativo de código aberto voltado para a criação, edição e contribuição colaborativa de croquis de escalada e dados geográficos. A sua privacidade e a transparência no tratamento das suas informações são prioridades para nós.
 
@@ -34,6 +34,7 @@ O Aresta Climb **não vende, não aluga e não compartilha** seus dados pessoais
 
 As únicas comunicações realizadas pelo aplicativo ocorrem com serviços de infraestrutura estritamente necessários:
 
+- **Cloudflare:** Utilizado para arquivos estáticos, prévias e interação com o GitHub.
 - **Supabase (Backend de Autenticação e Proxy):** Utilizado para validar a identidade do usuário, gerenciar sessões e intermediar a criação segura de Pull Requests.
 - **GitHub:** Utilizado para hospedagem do repositório público de dados, sincronização de branches e abertura de Pull Requests com os dados de croquis.
 - **Sentry (Monitoramento de Estabilidade e Telemetria de Falhas):** Utilizado para recepção e agregação automática de relatórios de erros não tratados e exceções críticas, viabilizando a correção rápida de problemas no software pelos desenvolvedores. Para mais informações sobre o tratamento de dados pela plataforma, consulte a [Política de Privacidade do Sentry](https://sentry.io/privacy/).
@@ -54,21 +55,30 @@ O processamento e a infraestrutura dos relatórios técnicos de falhas obedecem 
 
 ---
 
-## 4. Retenção e Exclusão de Dados
+## 4. Comunicação com Dispositivos e Prévia em Tempo Real
+O Editor possui a funcionalidade de conectar o aplicativo móvel do Aresta Climb no seu celular para prévia interativa e *Live Reload* dos croquis em edição:
+- **Rede Local (Wi-Fi)**: Comunicação direta ponto-a-ponto entre o seu computador e o celular sem passar pela internet.
+- **Nuvem (Retransmissor `previa.arestaclimb.com`)**:
+  - Disponível para usuários autenticados no Aresta Editor.
+  - Os arquivos do croqui trafegam em fluxo (*streaming* efêmero em memória) diretamente entre o computador e o celular conectado, sem persistência de conteúdo nos servidores da nuvem.
+  - Registros técnicos da sessão (identificador do usuário, IP público de conexão, IP local informado e horários de início/término) são mantidos no banco de dados exclusivamente para segurança da infraestrutura, diagnóstico e auditoria de tráfego, sendo **excluídos automaticamente após 90 dias**.
+
+---
+
+## 5. Retenção e Exclusão de Dados
 
 - Você pode desconectar sua conta a qualquer momento diretamente pela interface do aplicativo, o que removerá imediatamente todos os tokens de sessão armazenados no seu computador.
 - Como as sugestões de croquis aprovadas passam a compor a base de dados pública do projeto, o registro histórico de autoria (nome e e-mail no commit/Pull Request) permanece associado à contribuição nos termos da licença de código aberto do projeto.
 
 ---
 
-## 5. Código Aberto e Transparência
+## 6. Código Aberto e Transparência
 
 Por se tratar de um projeto de código aberto, todo o funcionamento do aplicativo, a lógica de rede e os protocolos de autenticação podem ser auditados publicamente no repositório oficial do projeto no GitHub.
 
 ---
 
-## 6. Contato
+## 7. Contato
 
-Se você tiver dúvidas sobre esta Política de Privacidade ou sobre o tratamento de seus dados pessoais, entre em contato conosco através do repositório oficial no GitHub:
-- [https://github.com/aresta-climb](https://github.com/aresta-climb)
+Se você tiver dúvidas sobre esta Política de Privacidade ou sobre o tratamento de seus dados pessoais, entre em contato conosco em contato@arestaclimb.com. 
 
