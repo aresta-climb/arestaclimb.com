@@ -31,16 +31,18 @@ describe("editor/beta/index.html - Estrutura DOM da Landing Page do Canal Beta",
     );
   });
 
-  it("deve conter o link para o Windows App Installer no Passo 2", () => {
+  it("deve conter o link para download direto do arquivo .appinstaller no Passo 2", () => {
     const html = fs.readFileSync(htmlPath, "utf-8");
     const dom = new JSDOM(html, { url: "http://localhost" });
     const { document } = dom.window;
 
-    const btnAppInstaller = document.querySelector('a[href*="ms-appinstaller:?source="]');
+    const btnAppInstaller = document.querySelector('a[href*="EditorArestaBeta.appinstaller"]');
     expect(btnAppInstaller).not.toBeNull();
-    expect(btnAppInstaller.getAttribute("href")).toContain(
-      "https://serving.arestaclimb.com/editor-beta/EditorAresta.appinstaller"
+    expect(btnAppInstaller.getAttribute("href")).toBe(
+      "https://serving.arestaclimb.com/editor-beta/EditorArestaBeta.appinstaller"
     );
+    expect(btnAppInstaller.hasAttribute("download")).toBe(true);
+    expect(html).not.toContain("ms-appinstaller:?source=");
   });
 
   it("deve conter o alternador de tema claro/escuro", () => {

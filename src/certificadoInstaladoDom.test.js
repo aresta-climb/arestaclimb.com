@@ -35,8 +35,10 @@ describe("editor/beta/certificado-instalado/index.html - Estrutura DOM da Págin
     const btnInstalar = document.getElementById("btn-instalar-appinstaller");
     expect(btnInstalar).not.toBeNull();
     expect(btnInstalar.getAttribute("href")).toBe(
-      "ms-appinstaller:?source=https://serving.arestaclimb.com/editor-beta/EditorAresta.appinstaller"
+      "https://serving.arestaclimb.com/editor-beta/EditorArestaBeta.appinstaller"
     );
+    expect(btnInstalar.hasAttribute("download")).toBe(true);
+    expect(html).not.toContain("ms-appinstaller:?source=");
 
     // Próximo passo antes do botão de instalação
     const indexProximoPasso = successState.innerHTML.indexOf("Próximo Passo");
