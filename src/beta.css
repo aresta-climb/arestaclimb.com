@@ -1,0 +1,218 @@
+/* ==========================================================================
+   Aresta Climb — Folha de Estilos do Canal Beta do Editor Aresta
+   Estética Azul Primário integrada ao Design System Arenito/Obsidian
+   ========================================================================== */
+
+:root {
+  --beta-blue: #0d6efd;
+  --beta-blue-hover: #0b5ed7;
+  --beta-blue-soft: rgba(13, 110, 253, 0.10);
+  --beta-blue-border: rgba(13, 110, 253, 0.25);
+  --success-green: #198754;
+  --success-bg: rgba(25, 135, 84, 0.12);
+  --error-red: #dc3545;
+  --error-bg: rgba(220, 53, 69, 0.10);
+}
+
+html[data-theme="dark"] {
+  --beta-blue: #3d8bfd;
+  --beta-blue-hover: #6ea8fe;
+  --beta-blue-soft: rgba(61, 139, 253, 0.18);
+  --beta-blue-border: rgba(61, 139, 253, 0.35);
+  --success-green: #20c997;
+  --success-bg: rgba(32, 201, 151, 0.15);
+  --error-red: #ea868f;
+  --error-bg: rgba(234, 134, 143, 0.15);
+}
+
+/* Badge do Canal Beta */
+.badge-beta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--beta-blue-soft);
+  color: var(--beta-blue);
+  border: 1px solid var(--beta-blue-border);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Cartões do Passo a Passo */
+.beta-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-block: 36px;
+}
+
+.beta-step-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.beta-step-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--beta-blue-border);
+  box-shadow: var(--shadow);
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--beta-blue);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.beta-step-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.beta-step-card p {
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.btn-beta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--beta-blue);
+  color: #fff !important;
+  padding: 13px 24px;
+  min-height: 48px;
+  box-sizing: border-box;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-beta-primary:hover {
+  background-color: var(--beta-blue-hover);
+  transform: translateY(-1px);
+}
+
+.btn-beta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--surface-2);
+  color: var(--text) !important;
+  border: 1px solid var(--line);
+  padding: 13px 20px;
+  min-height: 48px;
+  box-sizing: border-box;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.btn-beta-secondary:hover {
+  background-color: var(--line);
+}
+
+.step-caption {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Container de Status / Validação de Certificado */
+.status-card {
+  max-width: 680px;
+  margin: 40px auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.status-icon-wrap {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-icon-wrap.success {
+  background: var(--success-bg);
+  color: var(--success-green);
+}
+
+.status-icon-wrap.error {
+  background: var(--error-bg);
+  color: var(--error-red);
+}
+
+.status-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.status-desc {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.thumbprint-box {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  font-size: 0.85rem;
+  word-break: break-all;
+  margin-bottom: 28px;
+  color: var(--muted);
+}
+
+/* Caixa de aviso / SmartScreen */
+.info-notice {
+  background: var(--bg-soft);
+  border-left: 4px solid var(--beta-blue);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-top: 24px;
+  text-align: left;
+}

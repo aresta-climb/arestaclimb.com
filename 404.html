@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+  <head>
+  <script>try{const t=localStorage.getItem('aresta-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aresta Climb — 404 Página Não Encontrada</title>
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aresta Climb">
+    <meta property="og:url" content="https://arestaclimb.com/404">
+    <meta property="og:title" content="Aresta Climb — 404 Página Não Encontrada">
+    <meta property="og:description" content="A via ou página que você tentou acessar não existe ou foi removida.">
+    <meta property="og:image" content="https://arestaclimb.com/og.png">
+    <meta property="og:image:secure_url" content="https://arestaclimb.com/og.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Aresta Climb">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Aresta Climb — 404 Página Não Encontrada">
+    <meta name="twitter:description" content="A via ou página que você tentou acessar não existe ou foi removida.">
+    <meta name="twitter:image" content="https://arestaclimb.com/og.png">
+    <link rel="icon" type="image/png" href="/assets/logo_app.png">
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-content">
+        <a href="/" class="brand" aria-label="Aresta Climb - Início">
+          <img src="/assets/logo_app.png" alt="Aresta Logo" width="32" height="32" />
+          <span>ARESTA CLIMB</span>
+        </a>
+        <div class="topbar-actions">
+          <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro e escuro">◐</button>
+          <a href="/" class="btn-nav-back">Voltar ao Início</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-container">
+      <main class="content-area glass-panel not-found-card">
+        <span class="error-badge">404</span>
+        <h1>Página não encontrada</h1>
+        <p class="error-desc">
+          A via ou trilha que você tentou acessar não existe, foi desequipada ou mudou de endereço na rocha.
+        </p>
+
+        <div class="not-found-actions">
+          <a href="/" class="btn-primary" id="btn-home">Voltar ao Início</a>
+
+          <div class="redirect-notice" id="redirect-notice">
+            Redirecionando para a página inicial em <strong id="countdown">5</strong>s...
+            <button type="button" class="btn-secondary" id="btn-cancelar">Cancelar</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <span>© 2026 Aresta Climb · Liberdade com responsabilidade no outdoor.</span>
+        <div>
+          <a href="/termos-de-uso" style="margin-right: 16px;">Termos</a>
+          <a href="/politica-de-privacidade" style="margin-right: 16px;">Privacidade</a>
+          <a href="/editor">Editor</a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/theme.js"></script>
+    <script type="module" src="/src/notFound.js"></script>
+  </body>
+</html>

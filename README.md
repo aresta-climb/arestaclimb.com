@@ -21,8 +21,11 @@ Este projeto usa a arquitetura de Múltiplas Páginas (MPA) configurada no Vite.
 - `/termos-de-uso` ➔ Renderiza `termos-de-uso.md`
 - `/politica-de-privacidade` ➔ Renderiza `politica-de-privacidade.md`
 - `/politica-de-privacidade-editor` ➔ Renderiza `politica-de-privacidade-editor.md`
+- `/termos-de-uso-fixlog` ➔ Renderiza `termos-de-uso-fixlog.md`
+- `/politica-de-privacidade-fixlog` ➔ Renderiza `politica-de-privacidade-fixlog.md`
 - `/privacidade-contribuidores` ➔ Renderiza `privacidade-contribuidores.md`
 - `/contato` ➔ Renderiza `contato.md`
+- `/404` ➔ Página de erro e redirecionamento de rotas inexistentes (`404.html`)
 
 Os documentos legais de origem ficam na pasta `/public/docs/`. O arquivo JavaScript `src/main.js` intercepta as requisições e busca o markdown de forma assíncrona para montar o documento renderizado na tela. A landing page principal e todas as páginas utilizam o Design System unificado com suporte nativo a Dark/Light mode (`src/landing.css`, `src/landing.js`, `src/style.css` e `src/editor.css`).
 

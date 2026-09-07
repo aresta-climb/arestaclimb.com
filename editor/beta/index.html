@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+  <head>
+    <script>try{const t=localStorage.getItem('aresta-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aresta Climb — Editor Aresta (Beta) para Windows</title>
+    <meta name="description" content="Canal Beta oficial do Editor Aresta para Windows. Instale antecipadamente novos recursos de diagramação de croquis com atualizações automáticas via Windows App Installer.">
+    <link rel="icon" type="image/png" href="/assets/logo_app.png">
+    <link rel="stylesheet" href="/src/editor.css" />
+    <link rel="stylesheet" href="/src/beta.css" />
+  </head>
+  <body>
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-content">
+        <a href="/" class="brand" aria-label="Aresta Climb - Início">
+          <img src="/assets/logo_app.png" alt="Aresta Logo" width="32" height="32" />
+          <span>ARESTA CLIMB</span>
+          <span class="badge-beta">Beta</span>
+        </a>
+        <div class="topbar-actions">
+          <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro e escuro">◐</button>
+          <a href="/editor" class="btn-nav-back">Versão Oficial</a>
+          <a href="/" class="btn-nav-back">Início</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Seção Hero -->
+      <section class="hero" style="text-align: center; max-width: 800px; margin: 40px auto 20px;">
+        <div class="badge-beta mono" style="margin-bottom: 16px;">CANAL DE HOMOLOGAÇÃO &middot; WINDOWS</div>
+        <h1>Editor Aresta <span>(Beta)</span></h1>
+        <p class="lead">
+          O canal de testes do Editor Aresta permite experimentar as novidades, melhorias de performance e novas ferramentas de desenho de croquis antes do lançamento geral na Microsoft Store.
+        </p>
+        <div class="info-notice" style="margin-inline: auto;">
+          <strong>Coexistência Garantida:</strong> Você pode manter a versão oficial da Microsoft Store e a versão Beta instaladas simultaneamente no mesmo computador. Elas possuem identidades separadas no Windows.
+        </div>
+      </section>
+
+      <!-- Grade de Passos para Instalação -->
+      <section class="beta-steps-grid" aria-label="Passo a passo de instalação do Beta">
+        <!-- Passo 1 -->
+        <article class="beta-step-card">
+          <div>
+            <div class="step-number">1</div>
+            <h3>Preparar o Windows</h3>
+            <p>
+              O canal Beta é distribuído diretamente pela Aresta Climb e assinado digitalmente com nossa chave de testes. Para que o Windows autorize as instalações e atualizações automáticas, execute nosso script de configuração uma única vez.
+            </p>
+          </div>
+          <div>
+            <a href="https://serving.arestaclimb.com/editor-beta/InstalarCertificadoEditorArestaBeta.bat" download class="btn-beta-secondary" style="width: 100%;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Baixar Script de Configuração (.bat)
+            </a>
+            <small class="step-caption">
+              Execute o arquivo e confirme a permissão do Windows (UAC).
+            </small>
+          </div>
+        </article>
+
+        <!-- Passo 2 -->
+        <article class="beta-step-card">
+          <div>
+            <div class="step-number">2</div>
+            <h3>Instalar o Editor Beta</h3>
+            <p>
+              Após rodar o script do Passo 1, seu Windows está pronto. Clique no botão abaixo para abrir o instalador nativo do Windows com atualizações automáticas via App Installer.
+            </p>
+          </div>
+          <div>
+            <a href="ms-appinstaller:?source=https://serving.arestaclimb.com/editor-beta/EditorAresta.appinstaller" class="btn-beta-primary" style="width: 100%;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
+              Instalar Editor Aresta Beta
+            </a>
+            <small class="step-caption">
+              Abre o instalador nativo com atualizações automáticas.
+            </small>
+          </div>
+        </article>
+      </section>
+
+      <!-- Instruções SmartScreen -->
+      <section style="max-width: 800px; margin: 20px auto 60px;">
+        <div class="info-notice">
+          <strong>Aviso do Windows SmartScreen:</strong> Na primeira vez que abrir o instalador, se o Windows exibir uma tela azul avisando que o aplicativo é desconhecido, clique em <em>"Mais informações"</em> e depois em <em>"Instalar assim mesmo"</em>. As atualizações subsequentes serão 100% silenciosas e automáticas.
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="border-top: 1px solid var(--line); padding: 30px 0; text-align: center; color: var(--muted); font-size: 0.9rem;">
+      <div class="container">
+        <p>&copy; 2026 Aresta Climb. Todos os direitos reservados. &middot; <a href="/contato" style="text-decoration: underline;">Contato & Suporte</a></p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/theme.js"></script>
+  </body>
+</html>
