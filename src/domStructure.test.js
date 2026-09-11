@@ -17,10 +17,13 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(html).toContain('id="qr-modal"');
 
     // Botões das lojas e WhatsApp
-    expect(html).toContain('https://apps.apple.com/app/aresta-climb');
-    expect(html).toContain('https://play.google.com/store/apps/details?id=com.arestaclimb.app');
+    expect(html).toContain('https://apps.apple.com/app/id6776467893');
+    expect(html).toContain('https://play.google.com/store/apps/details?id=app.escalada.croquis');
     expect(html).toContain('https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA');
     expect(html).toContain('https://apps.microsoft.com/detail/9N6CQNH78WN8');
+
+    // Conquistadores podem aprovar ou rejeitar mudanças nos próprios croquis
+    expect(html).toMatch(/aprovar ou rejeitar/i);
   });
 
   it('editor.html deve conter o botão oficial da Microsoft Store e o link para o canal Beta no final da página', () => {
@@ -106,5 +109,30 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(configContent).toContain('notFound:');
     expect(configContent).toContain("appType: 'mpa'");
     expect(configContent).toContain('plugin404');
+  });
+
+  it('todas as páginas HTML devem conter links para a Google Play e Apple App Store', () => {
+    const pages = [
+      'index.html',
+      'app.html',
+      'download.html',
+      'editor.html',
+      'termos-de-uso.html',
+      'politica-de-privacidade.html',
+      'politica-de-privacidade-editor.html',
+      'privacidade-contribuidores.html',
+      'contato.html',
+      'termos-de-uso-fixlog.html',
+      'politica-de-privacidade-fixlog.html',
+      '404.html',
+      'editor/beta/index.html',
+      'editor/beta/certificado-instalado/index.html'
+    ];
+
+    pages.forEach(p => {
+      const html = fs.readFileSync(p, 'utf8');
+      expect(html).toContain('https://apps.apple.com/app/id6776467893');
+      expect(html).toContain('https://play.google.com/store/apps/details?id=app.escalada.croquis');
+    });
   });
 });

@@ -6,9 +6,9 @@ import './theme.js';
  */
 
 export const STORE_LINKS = {
-  // Substitua com os links finais das lojas de produção
-  ios: 'https://apps.apple.com/app/aresta-climb/id6742398507',
-  android: 'https://play.google.com/store/apps/details?id=com.arestaclimb.app',
+  // Links oficiais das lojas de produção
+  ios: 'https://apps.apple.com/app/id6776467893',
+  android: 'https://play.google.com/store/apps/details?id=app.escalada.croquis',
   whatsapp: 'https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA',
 };
 
