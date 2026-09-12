@@ -24,24 +24,41 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
 
     // Conquistadores podem aprovar ou rejeitar mudanças nos próprios croquis
     expect(html).toMatch(/aprovar ou rejeitar/i);
+
+    // Seção de Código Aberto e Ecossistema Comunitário
+    expect(html).toContain('id="codigo-aberto"');
+    expect(html).toContain('https://github.com/aresta-climb/aresta_app');
+    expect(html).toContain('https://github.com/aresta-climb/aresta_db');
+    expect(html).toContain('https://github.com/aresta-climb');
+    expect(html).toContain('Mozilla Public License 2.0');
+    expect(html).toContain('Open Database License 1.0');
+
+    // Ordem de apresentação: após #editor e antes de #faq
+    const idxEditor = html.indexOf('id="editor"');
+    const idxCodigoAberto = html.indexOf('id="codigo-aberto"');
+    const idxFaq = html.indexOf('id="faq"');
+    expect(idxCodigoAberto).toBeGreaterThan(idxEditor);
+    expect(idxFaq).toBeGreaterThan(idxCodigoAberto);
   });
 
-  it('editor.html deve conter o botão oficial da Microsoft Store e o link para o canal Beta no final da página', () => {
+  it('editor.html deve conter o botão oficial da Microsoft Store, link do canal Beta e link do GitHub no footer', () => {
     const html = fs.readFileSync('editor.html', 'utf8');
 
     expect(html).toContain('https://apps.microsoft.com/detail/9N6CQNH78WN8');
     expect(html).toContain('Microsoft Store');
     expect(html).toContain('id="themeToggle"');
     expect(html).toContain('href="/editor/beta"');
+    expect(html).toContain('https://github.com/aresta-climb');
   });
 
-  it('app.html deve conter os badges das lojas e a imagem do QR Code', () => {
+  it('app.html deve conter os badges das lojas, QR Code e link do GitHub no footer', () => {
     const html = fs.readFileSync('app.html', 'utf8');
 
     expect(html).toContain('/assets/qr_arestaclimb.svg');
     expect(html).toContain('id="btn-ios"');
     expect(html).toContain('id="btn-android"');
     expect(html).toContain('id="themeToggle"');
+    expect(html).toContain('https://github.com/aresta-climb');
   });
 
   it('todas as páginas HTML devem conter tags Open Graph para preview em redes e WhatsApp', () => {

@@ -1,4 +1,10 @@
-## ADDED Requirements
+# App Smart Redirect Specification
+
+## Purpose
+
+Detectar o sistema operacional do usuário no navegador e redirecionar automaticamente dispositivos móveis para as lojas de aplicativos ou exibir o hub desktop de download.
+
+## Requirements
 
 ### Requirement: Detecção de Sistema Operacional e Redirecionamento Client-Side
 As rotas `/app` e `/download` DEVEM detectar o sistema operacional do usuário no navegador e redirecionar automaticamente dispositivos móveis para as respectivas lojas de aplicativos.

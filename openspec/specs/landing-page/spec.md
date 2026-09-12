@@ -1,4 +1,10 @@
-## ADDED Requirements
+# Landing Page Specification
+
+## Purpose
+
+Apresentar o ecossistema Aresta Climb, suas funcionalidades de croquis interativos offline, governança comunitária e ferramentas de código aberto.
+
+## Requirements
 
 ### Requirement: Alternância de Tema Claro e Escuro
 O sistema DEVE permitir a alternância de tema visual entre modo claro (light) e modo escuro (dark), respeitando a preferência do sistema operacional e persistindo a escolha do usuário no `localStorage`.
@@ -57,6 +63,23 @@ A landing page DEVE apresentar a ferramenta desktop oficial Editor Aresta para c
 - **QUANDO** o usuário clica no botão ou link "Conhecer o Editor"
 - **ENTÃO** o navegador é direcionado para a rota `/editor`
 
+### Requirement: Seção de Código Aberto e Ecossistema Comunitário
+A landing page DEVE (MUST) apresentar uma seção dedicada com identificador semântico (`#codigo-aberto`) posicionada após a seção do Editor Aresta (`#editor`) e antes da seção de FAQ (`#faq`), comunicando de forma clara que o projeto é 100% open source, livre de barreiras proprietárias e construído pela comunidade de escalada. A seção DEVE (MUST) disponibilizar links de acesso externo e seguro para o repositório do aplicativo móvel (`aresta_app`), o repositório da base de dados (`aresta_db`) e a organização oficial no GitHub.
+
+#### Scenario: Visualização dos cards de repositórios abertos
+- **QUANDO** o usuário navega até a seção de código aberto
+- **ENTÃO** são exibidos cards informativos e distintos para o `aresta_app` e para o `aresta_db`, detalhando seus respectivos propósitos
+- **E** cada card contém um link seguro (`target="_blank" rel="noopener"`) apontando para `https://github.com/aresta-climb/aresta_app` e `https://github.com/aresta-climb/aresta_db`
+
+#### Scenario: Garantia de perpetuidade comunitária através de licenças abertas
+- **QUANDO** o usuário lê as descrições dos repositórios
+- **ENTÃO** o card do `aresta_app` explicita que o código é perpétuo da comunidade sob a Mozilla Public License 2.0
+- **E** o card do `aresta_db` explicita que os metadados são perpétuos da comunidade sob a Open Database License 1.0
+
+#### Scenario: Acesso ao link da organização no GitHub
+- **QUANDO** o usuário visualiza a seção de código aberto
+- **ENTÃO** é apresentado um elemento de chamada convidando a comunidade a contribuir e conhecer a organização oficial no GitHub em `https://github.com/aresta-climb`
+
 ### Requirement: FAQ Interativo e Acessível
 A landing page DEVE disponibilizar uma seção de perguntas frequentes em formato de acordeão, com suporte a teclado e atributos de acessibilidade (WAI-ARIA).
 
@@ -70,3 +93,14 @@ A landing page DEVE conter um card de chamada para ação direcionando os escala
 #### Scenario: Clique no link da comunidade
 - **QUANDO** o usuário clica no botão "Entrar na Comunidade do WhatsApp"
 - **ENTÃO** o link de convite oficial do WhatsApp é aberto em nova aba
+
+### Requirement: Identificação e Links da Organização no Rodapé
+O rodapé institucional de `index.html` e das páginas secundárias DEVE (MUST) conter links explícitos para a organização oficial no GitHub e para os repositórios do ecossistema.
+
+#### Scenario: Visualização dos links do projeto no rodapé da página inicial
+- **QUANDO** o usuário visualiza o rodapé de `index.html` na coluna de Projeto
+- **ENTÃO** são exibidos os links para a organização no GitHub (`https://github.com/aresta-climb`), para o repositório `aresta_app` e para o repositório `aresta_db`
+
+#### Scenario: Visualização do link do GitHub nas demais páginas
+- **QUANDO** o usuário navega em páginas secundárias como `editor.html` e `app.html`
+- **ENTÃO** o rodapé exibe o link direto apontando para a organização `https://github.com/aresta-climb`
