@@ -8,7 +8,7 @@ Você pode nos enviar um e-mail diretamente para:
 
 ## Comunidade
 Faça parte da nossa comunidade no WhatsApp para trocar ideias com outros escaladores, enviar sugestões e acompanhar as novidades do app em primeira mão:
-**[Entrar na Comunidade do WhatsApp](https://chat.whatsapp.com/Ip28rjQj4YbHgPgtN5Arcv)**
+**[Entrar na Comunidade do WhatsApp](https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA)**
 
 ## Suporte Técnico e Bugs
 Se você encontrou um problema enquanto usa o Aresta Climb, a **melhor forma de nos avisar é usando o ícone de bug (inseto 🐞) dentro do próprio aplicativo**. 

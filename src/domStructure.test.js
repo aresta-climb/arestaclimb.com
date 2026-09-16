@@ -74,6 +74,7 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
       'contato.html',
       'termos-de-uso-fixlog.html',
       'politica-de-privacidade-fixlog.html',
+      'comunidade.html',
       '404.html'
     ];
 
@@ -118,11 +119,12 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(html).toContain('src="/src/notFound.js"');
   });
 
-  it('vite.config.js deve registrar os pontos de entrada MPA do FixLog e da página 404', () => {
+  it('vite.config.js deve registrar os pontos de entrada MPA do FixLog, Comunidade e da página 404', () => {
     const configContent = fs.readFileSync('vite.config.js', 'utf8');
 
     expect(configContent).toContain('termosDeUsoFixlog:');
     expect(configContent).toContain('politicaDePrivacidadeFixlog:');
+    expect(configContent).toContain('comunidade:');
     expect(configContent).toContain('notFound:');
     expect(configContent).toContain("appType: 'mpa'");
     expect(configContent).toContain('plugin404');
@@ -141,6 +143,7 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
       'contato.html',
       'termos-de-uso-fixlog.html',
       'politica-de-privacidade-fixlog.html',
+      'comunidade.html',
       '404.html',
       'editor/beta/index.html',
       'editor/beta/certificado-instalado/index.html'
@@ -151,5 +154,23 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
       expect(html).toContain('https://apps.apple.com/app/id6776467893');
       expect(html).toContain('https://play.google.com/store/apps/details?id=app.escalada.croquis');
     });
+  });
+
+  it('comunidade.html deve conter meta refresh, botão direto e script de redirecionamento para o grupo oficial', () => {
+    const html = fs.readFileSync('comunidade.html', 'utf8');
+
+    expect(html).toContain('https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA');
+    expect(html).toContain('http-equiv="refresh"');
+    expect(html).toContain('id="btn-comunidade"');
+    expect(html).toContain('window.location.replace');
+  });
+
+  it('public/_redirects e contato.md devem apontar para o link oficial atualizado do WhatsApp', () => {
+    const redirects = fs.readFileSync('public/_redirects', 'utf8');
+    expect(redirects).toContain('/comunidade https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA 302');
+
+    const contatoMd = fs.readFileSync('public/docs/contato.md', 'utf8');
+    expect(contatoMd).toContain('https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA');
+    expect(contatoMd).not.toContain('Ip28rjQj4YbHgPgtN5Arcv');
   });
 });

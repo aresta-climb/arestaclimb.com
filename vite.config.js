@@ -21,6 +21,7 @@ export default defineConfig({
         certificadoInstalado: resolve(__dirname, 'editor/beta/certificado-instalado/index.html'),
         termosDeUsoFixlog: resolve(__dirname, 'termos-de-uso-fixlog.html'),
         politicaDePrivacidadeFixlog: resolve(__dirname, 'politica-de-privacidade-fixlog.html'),
+        comunidade: resolve(__dirname, 'comunidade.html'),
         notFound: resolve(__dirname, '404.html')
       }
     }
