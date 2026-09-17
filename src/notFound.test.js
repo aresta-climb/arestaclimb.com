@@ -164,6 +164,31 @@ describe('notFound.js — Gerenciamento da Página 404 e Redirecionamento', () =
       }).not.toThrow();
     });
 
+    it('deve interceptar deep links do app e interromper a contagem 404', () => {
+      document.body.innerHTML = `
+        <div id="not-found-default">
+          <span id="countdown">5</span>
+        </div>
+      `;
+      const mockNavegador = {
+        location: {
+          pathname: '/br_mg_igarape_pedra_grande/grupo_estacionamento',
+          hostname: 'app.arestaclimb.com',
+          href: 'https://app.arestaclimb.com/br_mg_igarape_pedra_grande/grupo_estacionamento'
+        }
+      };
+
+      configurarPagina404(document, mockNavegador, 5);
+
+      const countdownEl = document.getElementById('countdown');
+      expect(countdownEl.textContent).toBe('5');
+      expect(document.getElementById('not-found-default').style.display).toBe('none');
+      expect(document.getElementById('fallback-container')).not.toBeNull();
+
+      vi.advanceTimersByTime(10000);
+      expect(mockNavegador.location.href).toBe('https://app.arestaclimb.com/br_mg_igarape_pedra_grande/grupo_estacionamento');
+    });
+
     it('deve responder ao evento DOMContentLoaded caso o documento ainda esteja carregando', () => {
       document.body.innerHTML = `
         <div id="redirect-notice">

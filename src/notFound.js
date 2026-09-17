@@ -1,6 +1,9 @@
+import { inicializarFallback } from './appFallback.js';
+
 /**
  * Módulo de Controle da Página 404 do Aresta Climb
- * Gerencia a contagem regressiva e o redirecionamento automático para a página inicial.
+ * Gerencia a contagem regressiva e o redirecionamento automático para a página inicial,
+ * ou ativa o fallback visual para links profundos do app.arestaclimb.com.
  */
 
 /**
@@ -71,6 +74,10 @@ export function redirecionarParaInicio(navegador = window) {
  * @param {number} [segundos=5] - Duração do contador até o redirecionamento em segundos.
  */
 export function configurarPagina404(documento = document, navegador = window, segundos = 5) {
+  if (inicializarFallback(documento, navegador)) {
+    return;
+  }
+
   const elementoContador = documento.getElementById('countdown');
   const botaoCancelar = documento.getElementById('btn-cancelar');
   const elementoAviso = documento.getElementById('redirect-notice');
