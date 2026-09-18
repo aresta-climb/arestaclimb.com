@@ -1,4 +1,5 @@
 import { inicializarFallback } from './appFallback.js';
+import './telemetry.js';
 
 /**
  * Módulo de Controle da Página 404 do Aresta Climb
