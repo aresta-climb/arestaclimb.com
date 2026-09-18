@@ -32,6 +32,7 @@
   <link rel="icon" type="image/png" href="/assets/logo_app.png">
   <link rel="apple-touch-icon" href="/assets/logo_app.png">
   <link rel="stylesheet" href="/src/landing.css">
+  <script defer src="https://analytics.arestaclimb.com/script.js" data-website-id="arestaclimb-web"></script>
   <script type="module" src="/src/landing.js"></script>
 </head>
 <body>
@@ -54,7 +55,7 @@
       </nav>
       <div class="nav-actions">
         <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro e escuro">◐</button>
-        <a href="/app" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.88rem;">Baixar App</a>
+        <a href="/app" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.88rem;" data-umami-event="download-app-header">Baixar App</a>
       </div>
     </div>
   </header>
@@ -70,7 +71,7 @@
         </p>
         <div class="hero-actions">
           <div class="store-badge-group">
-            <a href="https://apps.apple.com/app/id6776467893" target="_blank" rel="noopener" class="store-badge" aria-label="Baixar na Apple App Store">
+            <a href="https://apps.apple.com/app/id6776467893" target="_blank" rel="noopener" class="store-badge" aria-label="Baixar na Apple App Store" data-umami-event="download-click" data-umami-event-plataforma="ios">
               <svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
               <span class="store-badge-text">
                 <small>Disponível na</small>
@@ -78,7 +79,7 @@
               </span>
             </a>
 
-            <a href="https://play.google.com/store/apps/details?id=app.escalada.croquis" target="_blank" rel="noopener" class="store-badge" aria-label="Baixar no Google Play">
+            <a href="https://play.google.com/store/apps/details?id=app.escalada.croquis" target="_blank" rel="noopener" class="store-badge" aria-label="Baixar no Google Play" data-umami-event="download-click" data-umami-event-plataforma="android">
               <svg viewBox="0 0 512 512"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
               <span class="store-badge-text">
                 <small>Disponível no</small>
@@ -88,11 +89,11 @@
           </div>
 
           <div class="hero-subactions">
-            <button id="open-qr-modal" class="btn-qr-trigger" aria-label="Abrir QR Code para baixar no celular">
+            <button id="open-qr-modal" class="btn-qr-trigger" aria-label="Abrir QR Code para baixar no celular" data-umami-event="visualizou-qr" data-umami-event-origem="hero">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
               Escanear QR Code no celular
             </button>
-            <a href="/editor" class="btn-qr-trigger">Conhecer o Editor Desktop ↗</a>
+            <a href="/editor" class="btn-qr-trigger" data-umami-event="conhecer-editor" data-umami-event-origem="hero">Conhecer o Editor Desktop ↗</a>
           </div>
         </div>
         <div class="hero-note mono">OFFLINE FIRST / DADOS ORGANIZADOS / CONSTRUÇÃO COLETIVA</div>
@@ -485,11 +486,11 @@
             Baixe o aplicativo para iOS ou Android e entre na comunidade oficial no WhatsApp para trocar betas, sugerir novos picos e acompanhar o desenvolvimento.
           </p>
           <div class="community-cta-actions">
-            <a href="https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA" target="_blank" rel="noopener" class="btn btn-whatsapp" aria-label="Entrar na Comunidade do WhatsApp">
+            <a href="https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA" target="_blank" rel="noopener" class="btn btn-whatsapp" aria-label="Entrar na Comunidade do WhatsApp" data-umami-event="comunidade-whatsapp-click" data-umami-event-origem="cta-final">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
               Entrar na Comunidade do WhatsApp
             </a>
-            <a href="/app" class="btn btn-secondary">Baixar o Aplicativo</a>
+            <a href="/app" class="btn btn-secondary" data-umami-event="download-app-comunidade">Baixar o Aplicativo</a>
           </div>
         </div>
       </div>

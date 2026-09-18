@@ -5,6 +5,8 @@ import {
   getStoreUrl,
   performRedirect,
   setupAppPage,
+  parseDeepLink,
+  getDeepLinkUri,
 } from "./appRedirect.js";
 
 describe("appRedirect.js - Detecção de Sistema Operacional e Redirecionamento", () => {
@@ -101,6 +103,22 @@ describe("appRedirect.js - Detecção de Sistema Operacional e Redirecionamento"
       expect(mockLocation.replace).toHaveBeenCalled();
     });
 
+    it("deve exibir status customizado de deep link quando pathname contiver recurso", () => {
+      const mockLocation = { replace: vi.fn(), href: "" };
+      delete window.location;
+      window.location = mockLocation;
+
+      setupAppPage({
+        userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0)",
+        autoRedirect: true,
+        pathname: "/via/diedro-pacoca",
+      });
+
+      const status = document.getElementById("redirect-status");
+      expect(status.textContent).toBe("Abrindo via no aplicativo Aresta Climb...");
+      expect(mockLocation.replace).toHaveBeenCalledWith("aresta://via/diedro-pacoca");
+    });
+
     it("deve inicializar via evento DOMContentLoaded quando houver download-hub", () => {
       expect(() => document.dispatchEvent(new Event("DOMContentLoaded"))).not.toThrow();
     });
@@ -117,6 +135,78 @@ describe("appRedirect.js - Detecção de Sistema Operacional e Redirecionamento"
       const code = jsQR(new Uint8ClampedArray(data), info.width, info.height);
       expect(code).not.toBeNull();
       expect(code?.data).toBe("https://arestaclimb.com/app");
+    });
+  });
+
+  describe("parseDeepLink e getDeepLinkUri", () => {
+    it("deve identificar corretamente rotas de via com singular e plural", () => {
+      expect(parseDeepLink("/via/pedra-do-bau")).toEqual({
+        tipo: "via",
+        id: "pedra-do-bau",
+        uri: "aresta://via/pedra-do-bau",
+      });
+      expect(parseDeepLink("/vias/pedra-do-bau")).toEqual({
+        tipo: "via",
+        id: "pedra-do-bau",
+        uri: "aresta://via/pedra-do-bau",
+      });
+    });
+
+    it("deve identificar rotas com prefixo /app ou /download", () => {
+      expect(parseDeepLink("/app/setor/falesia-dos-olhos")).toEqual({
+        tipo: "setor",
+        id: "falesia-dos-olhos",
+        uri: "aresta://setor/falesia-dos-olhos",
+      });
+      expect(parseDeepLink("/download/croqui/croqui-123")).toEqual({
+        tipo: "croqui",
+        id: "croqui-123",
+        uri: "aresta://croqui/croqui-123",
+      });
+    });
+
+    it("deve retornar null para rotas comuns sem identificador de deep link", () => {
+      expect(parseDeepLink("/")).toBeNull();
+      expect(parseDeepLink("/app")).toBeNull();
+      expect(parseDeepLink("/download")).toBeNull();
+      expect(parseDeepLink("/termos-de-uso")).toBeNull();
+      expect(parseDeepLink("")).toBeNull();
+      expect(parseDeepLink(null)).toBeNull();
+    });
+
+    it("getDeepLinkUri deve formatar a URI corretamente", () => {
+      expect(getDeepLinkUri({ tipo: "via", id: "123" })).toBe("aresta://via/123");
+      expect(getDeepLinkUri(null)).toBeNull();
+    });
+  });
+
+  describe("performRedirect com Telemetria e Deep Link", () => {
+    it("deve emitir telemetria de smart-redirect em dispositivo móvel", () => {
+      window.umami = { track: vi.fn() };
+      const mockLocation = { replace: vi.fn(), href: "" };
+
+      performRedirect("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0)", mockLocation);
+
+      expect(window.umami.track).toHaveBeenCalledWith("smart-redirect", {
+        plataforma: "ios",
+        isDeepLink: false,
+      });
+    });
+
+    it("deve emitir telemetria de deep-link quando pathname for rota de recurso", () => {
+      window.umami = { track: vi.fn() };
+      const mockLocation = { replace: vi.fn(), href: "" };
+
+      performRedirect("Mozilla/5.0 (Linux; Android 14)", mockLocation, {
+        pathname: "/via/via-do-diedro",
+      });
+
+      expect(window.umami.track).toHaveBeenCalledWith("deep-link-redirect", {
+        plataforma: "android",
+        tipo: "via",
+        id: "via-do-diedro",
+      });
+      expect(mockLocation.replace).toHaveBeenCalledWith("aresta://via/via-do-diedro");
     });
   });
 });

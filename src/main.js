@@ -1,5 +1,6 @@
 import './style.css';
 import './theme.js';
+import './telemetry.js';
 import { loadAndRenderMarkdown } from './markdownRenderer.js';
 
 /**

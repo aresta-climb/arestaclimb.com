@@ -4,6 +4,7 @@
  */
 
 import { THEME_KEY, getPreferredTheme, setTheme, toggleTheme, initTheme } from './theme.js';
+import './telemetry.js';
 export { THEME_KEY, getPreferredTheme, setTheme, toggleTheme, initTheme };
 
 export const SHOWCASE_ITEMS = [

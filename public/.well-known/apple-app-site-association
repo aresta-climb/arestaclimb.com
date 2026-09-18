@@ -3,7 +3,13 @@
     "apps": [],
     "details": [
       {
-        "appID": "TEAM_ID.app.escalada.croquis",
+        "appIDs": ["Z74K7R3WU7.app.escalada.croquis"],
+        "components": [
+          {
+            "/": "/*"
+          }
+        ],
+        "appID": "Z74K7R3WU7.app.escalada.croquis",
         "paths": ["/*"]
       }
     ]

@@ -1,5 +1,6 @@
 import './editor.css';
 import './theme.js';
+import './telemetry.js';
 
 export function setupDownloadButton() {
   const downloadBtn = document.getElementById('download-btn');

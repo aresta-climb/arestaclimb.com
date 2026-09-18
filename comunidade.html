@@ -23,6 +23,7 @@
     <meta name="twitter:image" content="https://arestaclimb.com/og.png">
     <link rel="icon" type="image/png" href="/assets/logo_app.png">
     <link rel="stylesheet" href="/src/style.css" />
+    <script defer src="https://analytics.arestaclimb.com/script.js" data-website-id="arestaclimb-web"></script>
   </head>
   <body>
     <header class="topbar">
@@ -45,7 +46,7 @@
           Redirecionando você para o grupo oficial no WhatsApp...
         </p>
         <p style="margin-bottom: 24px;">
-          <a id="btn-comunidade" href="https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA" class="btn-primary" style="display: inline-block; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: 700;">
+          <a id="btn-comunidade" href="https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA" class="btn-primary" style="display: inline-block; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: 700;" data-umami-event="comunidade-whatsapp-click">
             Entrar na Comunidade do WhatsApp
           </a>
         </p>
@@ -69,6 +70,7 @@
     </footer>
 
     <script type="module" src="/src/theme.js"></script>
+    <script type="module" src="/src/telemetry.js"></script>
     <script>
       try {
         window.location.replace("https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA");
