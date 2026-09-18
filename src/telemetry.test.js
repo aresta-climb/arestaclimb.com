@@ -3,6 +3,8 @@ import {
   trackEvent,
   trackPageView,
   setupDeclarativeTracking,
+  setupAutoLinkTracking,
+  classifyLink,
   initTelemetry,
   extractEventData,
 } from "./telemetry.js";
@@ -251,6 +253,235 @@ describe("telemetry.js - Módulo de Telemetria Client-Side (Umami)", () => {
 
       document.getElementById("btn-custom").click();
       expect(mockTrack).toHaveBeenCalledWith("custom-ev", {});
+    });
+  });
+
+  describe("setupAutoLinkTracking", () => {
+    it("deve rastrear links externos como 'link-externo' com url, dominio e texto", () => {
+      const mockTrack = vi.fn();
+      window.umami = { track: mockTrack };
+
+      document.body.innerHTML = `
+        <a id="link-ext" href="https://instagram.com/arestaclimb" target="_blank">
+          Siga nosso Instagram
+        </a>
+      `;
+
+      setupAutoLinkTracking(document.body);
+
+      document.getElementById("link-ext").click();
+
+      expect(mockTrack).toHaveBeenCalledWith("link-externo", {
+        url: "https://instagram.com/arestaclimb",
+        dominio: "instagram.com",
+        texto: "Siga nosso Instagram",
+      });
+    });
+
+    it("deve rastrear links internos como 'link-interno' com destino e texto", () => {
+      const mockTrack = vi.fn();
+      window.umami = { track: mockTrack };
+
+      document.body.innerHTML = `
+        <a id="link-int" href="/download">
+          Ir para Download
+        </a>
+      `;
+
+      setupAutoLinkTracking(document.body);
+
+      document.getElementById("link-int").click();
+
+      expect(mockTrack).toHaveBeenCalledWith("link-interno", {
+        destino: "/download",
+        texto: "Ir para Download",
+      });
+    });
+
+    it("deve rastrear links de âncora na mesma página como 'link-ancora'", () => {
+      const mockTrack = vi.fn();
+      window.umami = { track: mockTrack };
+
+      document.body.innerHTML = `
+        <a id="link-anc" href="#como-funciona">
+          Como Funciona
+        </a>
+      `;
+
+      setupAutoLinkTracking(document.body);
+
+      document.getElementById("link-anc").click();
+
+      expect(mockTrack).toHaveBeenCalledWith("link-ancora", {
+        ancora: "#como-funciona",
+        texto: "Como Funciona",
+      });
+    });
+
+    it("deve rastrear links de email mailto: como 'contato-email'", () => {
+      const mockTrack = vi.fn();
+      window.umami = { track: mockTrack };
+
+      document.body.innerHTML = `
+        <a id="link-mail" href="mailto:contato@arestaclimb.com">
+          Envie um e-mail
+        </a>
+      `;
+
+      setupAutoLinkTracking(document.body);
+
+      document.getElementById("link-mail").click();
+
+      expect(mockTrack).toHaveBeenCalledWith("contato-email", {
+        email: "contato@arestaclimb.com",
+        texto: "Envie um e-mail",
+      });
+    });
+
+    it("deve rastrear links de telefone tel: como 'contato-telefone'", () => {
+      const mockTrack = vi.fn();
+      window.umami = { track: mockTrack };
+
+      document.body.innerHTML = `
+        <a id="link-tel" href="tel:+5511999999999">
+          Ligue agora
+        </a>
+      `;
+
+      setupAutoLinkTracking(document.body);
+
+      document.getElementById("link-tel").click();
+
+      expect(mockTrack).toHaveBeenCalledWith("contato-telefone", {
+        telefone: "+5511999999999",
+        texto: "Ligue agora",
+      });
+    });
+
+    it("deve rastrear downloads de arquivos estáticos como 'download-arquivo'", () => {
+      const mockTrack = vi.fn();
+      window.umami = { track: mockTrack };
+
+      document.body.innerHTML = `
+        <a id="link-pdf" href="/arquivos/manual-usuario.pdf">
+          Baixar Manual em PDF
+        </a>
+      `;
+
+      setupAutoLinkTracking(document.body);
+
+      document.getElementById("link-pdf").click();
+
+      expect(mockTrack).toHaveBeenCalledWith("download-arquivo", {
+        url: "/arquivos/manual-usuario.pdf",
+        texto: "Baixar Manual em PDF",
+      });
+    });
+
+    it("NÃO deve disparar rastreamento genérico se o link já possui data-umami-event (evitar duplicatas)", () => {
+      const mockTrack = vi.fn();
+      window.umami = { track: mockTrack };
+
+      const container = document.createElement("div");
+      container.innerHTML = `
+        <a id="link-custom" href="https://chat.whatsapp.com/123" data-umami-event="join-whatsapp" data-umami-event-origem="footer">
+          Entrar no WhatsApp
+        </a>
+      `;
+
+      setupDeclarativeTracking(container);
+      setupAutoLinkTracking(container);
+
+      container.querySelector("#link-custom").click();
+
+      // Deve ter sido chamado apenas pelo declarative tracking com 'join-whatsapp'
+      expect(mockTrack).toHaveBeenCalledTimes(1);
+      expect(mockTrack).toHaveBeenCalledWith("join-whatsapp", { origem: "footer" });
+    });
+
+    it("deve ignorar links vazios, com '#' puro ou 'javascript:'", () => {
+      const mockTrack = vi.fn();
+      window.umami = { track: mockTrack };
+
+      document.body.innerHTML = `
+        <a id="link-vazio" href="">Vazio</a>
+        <a id="link-hash" href="#">Apenas Hash</a>
+        <a id="link-js" href="javascript:void(0)">JS</a>
+      `;
+
+      setupAutoLinkTracking(document.body);
+
+      document.getElementById("link-vazio").click();
+      document.getElementById("link-hash").click();
+      document.getElementById("link-js").click();
+
+      expect(mockTrack).not.toHaveBeenCalled();
+    });
+
+    it("deve funcionar quando o clique ocorre em um elemento interno (ex: span/ícone) do link", () => {
+      const mockTrack = vi.fn();
+      window.umami = { track: mockTrack };
+
+      document.body.innerHTML = `
+        <a id="link-com-filho" href="https://github.com/aresta-climb">
+          <span id="icone-filho">GitHub</span>
+        </a>
+      `;
+
+      setupAutoLinkTracking(document.body);
+
+      document.getElementById("icone-filho").click();
+
+      expect(mockTrack).toHaveBeenCalledWith("link-externo", {
+        url: "https://github.com/aresta-climb",
+        dominio: "github.com",
+        texto: "GitHub",
+      });
+    });
+
+    it("não deve quebrar se rootElement for nulo ou inválido", () => {
+      expect(() => setupAutoLinkTracking(null)).not.toThrow();
+      expect(() => setupAutoLinkTracking({})).not.toThrow();
+    });
+
+    it("setupAutoLinkTracking deve ignorar cliques quando target não possui closest", () => {
+      const mockRoot = {
+        addEventListener: vi.fn((event, handler) => {
+          handler({ target: {} });
+        }),
+      };
+
+      expect(() => setupAutoLinkTracking(mockRoot)).not.toThrow();
+    });
+  });
+
+  describe("classifyLink", () => {
+    it("deve retornar null se elemento for inválido ou não tiver atributo href", () => {
+      expect(classifyLink(null)).toBeNull();
+      expect(classifyLink({})).toBeNull();
+      const div = document.createElement("div");
+      expect(classifyLink(div)).toBeNull();
+    });
+
+    it("deve retornar link-ancora quando URL é o mesmo pathname mas possui hash", () => {
+      const a = document.createElement("a");
+      a.setAttribute("href", "/index.html#recursos");
+      a.textContent = "Recursos";
+
+      const classified = classifyLink(a, "http://localhost:3000", "/index.html");
+      expect(classified).toEqual({
+        eventName: "link-ancora",
+        eventData: {
+          ancora: "#recursos",
+          texto: "Recursos",
+        },
+      });
+    });
+
+    it("deve retornar null se URL for inválida e lançar exceção", () => {
+      const a = document.createElement("a");
+      a.setAttribute("href", "http://[invalid-url");
+      expect(classifyLink(a)).toBeNull();
     });
   });
 });

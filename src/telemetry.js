@@ -72,6 +72,122 @@ export function extractEventData(element) {
 }
 
 /**
+ * Analisa e classifica um elemento de link para telemetria automática.
+ * @param {HTMLAnchorElement | Element} linkEl
+ * @param {string} [currentOrigin]
+ * @param {string} [currentPathname]
+ * @returns {{ eventName: string, eventData: Record<string, any> } | null}
+ */
+export function classifyLink(
+  linkEl,
+  currentOrigin = (typeof window !== 'undefined' && window.location ? window.location.origin : ''),
+  currentPathname = (typeof window !== 'undefined' && window.location ? window.location.pathname : '')
+) {
+  if (!linkEl || typeof linkEl.getAttribute !== 'function') {
+    return null;
+  }
+
+  const href = linkEl.getAttribute('href');
+  if (!href || typeof href !== 'string') {
+    return null;
+  }
+
+  const trimmedHref = href.trim();
+  if (!trimmedHref || trimmedHref === '#' || trimmedHref.toLowerCase().startsWith('javascript:')) {
+    return null;
+  }
+
+  const texto = (linkEl.textContent || '')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .slice(0, 80) || (linkEl.getAttribute('aria-label') || linkEl.getAttribute('title') || '');
+
+  // 1. Protocolos especiais (mailto, tel)
+  if (trimmedHref.toLowerCase().startsWith('mailto:')) {
+    return {
+      eventName: 'contato-email',
+      eventData: {
+        email: trimmedHref.replace(/^mailto:/i, ''),
+        ...(texto ? { texto } : {}),
+      },
+    };
+  }
+
+  if (trimmedHref.toLowerCase().startsWith('tel:')) {
+    return {
+      eventName: 'contato-telefone',
+      eventData: {
+        telefone: trimmedHref.replace(/^tel:/i, ''),
+        ...(texto ? { texto } : {}),
+      },
+    };
+  }
+
+  // 2. Links de âncora (#secao)
+  if (trimmedHref.startsWith('#')) {
+    return {
+      eventName: 'link-ancora',
+      eventData: {
+        ancora: trimmedHref,
+        ...(texto ? { texto } : {}),
+      },
+    };
+  }
+
+  // 3. Download de arquivos estáticos
+  const isDownload = /\.(pdf|apk|zip|ipa|dmg|exe|csv|xlsx|json)$/i.test(trimmedHref.split('?')[0]);
+  if (isDownload) {
+    return {
+      eventName: 'download-arquivo',
+      eventData: {
+        url: trimmedHref,
+        ...(texto ? { texto } : {}),
+      },
+    };
+  }
+
+  // 4. Links externos vs internos
+  try {
+    const base = currentOrigin || 'http://localhost';
+    const parsedUrl = new URL(trimmedHref, base);
+
+    if (currentOrigin && parsedUrl.origin !== currentOrigin) {
+      return {
+        eventName: 'link-externo',
+        eventData: {
+          url: trimmedHref,
+          dominio: parsedUrl.hostname,
+          ...(texto ? { texto } : {}),
+        },
+      };
+    }
+
+    if (parsedUrl.pathname === currentPathname && parsedUrl.hash) {
+      return {
+        eventName: 'link-ancora',
+        eventData: {
+          ancora: parsedUrl.hash,
+          ...(texto ? { texto } : {}),
+        },
+      };
+    }
+
+    return {
+      eventName: 'link-interno',
+      eventData: {
+        destino: trimmedHref,
+        ...(texto ? { texto } : {}),
+      },
+    };
+  } catch {
+    return null;
+  }
+}
+
+const declarativeRoots = new WeakSet();
+const autoLinkRoots = new WeakSet();
+
+/**
  * Configura o listener de clique global para elementos com atributos declarativos `data-umami-event`.
  * @param {Element | Document} [rootElement]
  */
@@ -79,6 +195,11 @@ export function setupDeclarativeTracking(rootElement = (typeof document !== 'und
   if (!rootElement || typeof rootElement.addEventListener !== 'function') {
     return;
   }
+
+  if (declarativeRoots.has(rootElement)) {
+    return;
+  }
+  declarativeRoots.add(rootElement);
 
   rootElement.addEventListener('click', (event) => {
     const target = event.target;
@@ -100,12 +221,53 @@ export function setupDeclarativeTracking(rootElement = (typeof document !== 'und
 }
 
 /**
+ * Configura o listener global para capturar automaticamente cliques em quaisquer links <a>.
+ * @param {Element | Document} [rootElement]
+ */
+export function setupAutoLinkTracking(rootElement = (typeof document !== 'undefined' ? document : null)) {
+  if (!rootElement || typeof rootElement.addEventListener !== 'function') {
+    return;
+  }
+
+  if (autoLinkRoots.has(rootElement)) {
+    return;
+  }
+  autoLinkRoots.add(rootElement);
+
+  rootElement.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!target || typeof target.closest !== 'function') {
+      return;
+    }
+
+    const link = target.closest('a[href]');
+    if (!link) {
+      return;
+    }
+
+    // Se o elemento ou seu link já possui rastreamento declarativo customizado, ignora para evitar duplicatas
+    if (link.closest('[data-umami-event]')) {
+      return;
+    }
+
+    const classified = classifyLink(link);
+    if (classified) {
+      trackEvent(classified.eventName, classified.eventData);
+    }
+  });
+}
+
+/**
  * Inicializa os serviços de telemetria da página.
- * @param {{ autoTrackPageView?: boolean, rootElement?: Element | Document }} [options]
+ * @param {{ autoTrackPageView?: boolean, autoTrackLinks?: boolean, rootElement?: Element | Document }} [options]
  */
 export function initTelemetry(options = {}) {
   const root = options.rootElement || (typeof document !== 'undefined' ? document : null);
   setupDeclarativeTracking(root);
+
+  if (options.autoTrackLinks !== false) {
+    setupAutoLinkTracking(root);
+  }
 
   if (options.autoTrackPageView) {
     trackPageView();
@@ -115,3 +277,4 @@ export function initTelemetry(options = {}) {
 if (typeof document !== 'undefined') {
   initTelemetry();
 }
+
