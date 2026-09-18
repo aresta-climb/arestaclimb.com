@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import {
   formatarSlug,
+  formatarUrlAberturaApp,
   detectarDeepLink,
   extrairInfoDeepLink,
   renderizarCardSetor,
@@ -138,22 +139,37 @@ describe('appFallback.js - Fallback Web para app.arestaclimb.com', () => {
     });
   });
 
+  describe('formatarUrlAberturaApp', () => {
+    it('deve converter URL https para scheme aresta://', () => {
+      const url = 'https://app.arestaclimb.com/br_mg_igarape_pedra_grande/savassinha';
+      expect(formatarUrlAberturaApp(url)).toBe('aresta://app.arestaclimb.com/br_mg_igarape_pedra_grande/savassinha');
+    });
+
+    it('deve retornar string vazia para valores nulos ou inválidos', () => {
+      expect(formatarUrlAberturaApp(null)).toBe('');
+      expect(formatarUrlAberturaApp('')).toBe('');
+      expect(formatarUrlAberturaApp(123)).toBe('');
+    });
+  });
+
   describe('renderizarCardSetor', () => {
-    it('deve injetar a marcação HTML correta com botões para App Store e Google Play e link para o app', () => {
+    it('deve renderizar o card de setor com informações completas e botões de loja', () => {
       const elemento = document.getElementById('fallback-container');
       const info = extrairInfoDeepLink('/br_mg_igarape_pedra_grande/grupo_estacionamento/savassinha');
       
       renderizarCardSetor(elemento, info, 'https://app.arestaclimb.com/br_mg_igarape_pedra_grande/grupo_estacionamento/savassinha');
 
-      expect(elemento.innerHTML).toContain('Savassinha');
+      expect(elemento.innerHTML).toContain('ARESTA CLIMB · SETOR DE CROQUI');
       expect(elemento.innerHTML).toContain('Igarape Pedra Grande (MG)');
+      expect(elemento.innerHTML).toContain('Grupo Estacionamento');
+      expect(elemento.innerHTML).toContain('Savassinha');
       expect(elemento.innerHTML).toContain(STORE_LINKS.ios);
       expect(elemento.innerHTML).toContain(STORE_LINKS.android);
       expect(elemento.textContent).toContain('Baixar na');
       expect(elemento.textContent).toContain('App Store');
       expect(elemento.textContent).toContain('Disponível no');
       expect(elemento.textContent).toContain('Google Play');
-      expect(elemento.innerHTML).toContain('https://app.arestaclimb.com/br_mg_igarape_pedra_grande/grupo_estacionamento/savassinha');
+      expect(elemento.innerHTML).toContain('aresta://app.arestaclimb.com/br_mg_igarape_pedra_grande/grupo_estacionamento/savassinha');
       expect(elemento.style.display).toBe('block');
     });
 

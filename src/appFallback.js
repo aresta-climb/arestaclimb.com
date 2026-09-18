@@ -147,6 +147,20 @@ export function extrairInfoDeepLink(pathname) {
 /**
  * Renderiza o cartão visual com as informações do setor/via e links das lojas oficiais.
  *
+/**
+ * Formata a URL para abertura direta no aplicativo nativo via custom scheme (aresta://).
+ *
+ * @param {string} url - URL HTTPS original.
+ * @returns {string} URI com esquema aresta://.
+ */
+export function formatarUrlAberturaApp(url) {
+  if (!url || typeof url !== 'string') return '';
+  return url.replace(/^https?:\/\//i, 'aresta://');
+}
+
+/**
+ * Renderiza o cartão visual de fallback de setor/via com links para download ou abertura no aplicativo.
+ *
  * @param {HTMLElement|null} elementoAlvo - Elemento HTML container.
  * @param {object} info - Objeto retornado por extrairInfoDeepLink.
  * @param {string} [urlOriginal=''] - URL completa requisitada.
@@ -169,6 +183,8 @@ export function renderizarCardSetor(elementoAlvo, info, urlOriginal = '') {
       : info.tipo === 'setor'
         ? 'Setor de Croqui'
         : 'Pico de Escalada';
+
+  const urlApp = formatarUrlAberturaApp(urlOriginal);
 
   elementoAlvo.innerHTML = `
     <div class="sector-fallback-card glass-panel">
@@ -197,9 +213,9 @@ export function renderizarCardSetor(elementoAlvo, info, urlOriginal = '') {
         </a>
       </div>
 
-      ${urlOriginal ? `
+      ${urlApp ? `
         <div style="font-size: 0.85rem; color: var(--muted);">
-          Já possui o app instalado? <a href="${urlOriginal}" style="color: var(--accent); font-weight: 600;">Toque aqui para abrir no aplicativo</a>
+          Já possui o app instalado? <a id="link-abrir-app" href="${urlApp}" style="color: var(--accent); font-weight: 600;">Toque aqui para abrir no aplicativo</a>
         </div>
       ` : ''}
     </div>
