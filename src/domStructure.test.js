@@ -20,7 +20,7 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(html).toContain('https://apps.apple.com/app/id6776467893');
     expect(html).toContain('https://play.google.com/store/apps/details?id=app.escalada.croquis');
     expect(html).toContain('https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA');
-    expect(html).toContain('https://apps.microsoft.com/detail/9N6CQNH78WN8');
+    expect(html).toContain('href="/editor"');
 
     // Conquistadores podem aprovar ou rejeitar mudanças nos próprios croquis
     expect(html).toMatch(/aprovar ou rejeitar/i);
