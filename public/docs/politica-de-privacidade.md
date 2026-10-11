@@ -45,6 +45,24 @@ Registro podem incluir informações como o endereço de Protocolo de Internet
 configuração do aplicativo ao utilizar nosso Serviço, a hora e a data do seu uso
 do Serviço e outras estatísticas estritamente voltadas para a correção de bugs.
 
+## Envio de Feedbacks e Sugestões
+
+O aplicativo disponibiliza um recurso integrado para que você possa enviar
+relatos de problemas, correções em croquis e sugestões de melhoria.
+
+Ao submeter um feedback:
+- **Visibilidade Pública no GitHub:** O texto do relato descritivo e a captura de
+  tela (com eventuais desenhos ou anotações feitos por você) serão publicados como
+  uma issue pública no repositório comunitário de código aberto do projeto no
+  GitHub, permitindo que mantenedores e colaboradores atuem sobre a solicitação.
+  Recomendamos que você não insira dados pessoais ou sensíveis no texto do relato
+  nem desenhe informações confidenciais sobre a captura de tela.
+- **Diagnósticos Técnicos e Telemetria Restrita:** Metadados técnicos do
+  dispositivo (como modelo do aparelho, versão do sistema operacional, resolução de
+  tela e ip) são armazenados de forma restrita e segura em nosso banco de dados no
+  Supabase, sendo acessíveis apenas aos mantenedores autorizados para fins exclusivos
+  de diagnóstico e correção de bugs, sem qualquer divulgação pública.
+
 ## Serviços de Terceiros
 
 O aplicativo utiliza serviços de terceiros que podem coletar dados de forma
@@ -58,6 +76,8 @@ provedores de serviços terceirizados usados pelo aplicativo:
 - [Firebase Crashlytics](https://firebase.google.com/support/privacy)
 - [Firebase Remote Config](https://firebase.google.com/support/privacy)
 - [Firebase App Check](https://firebase.google.com/support/privacy)
+- [GitHub](https://docs.github.com/pt/site-policy/privacy-policies/github-general-privacy-statement)
+- [Supabase](https://supabase.com/privacy)
 
 ## Links para Outros Sites
 
@@ -115,4 +135,4 @@ para: **contato@arestaclimb.com**.
 
 ## Vigência
 
-Esta política entra em vigor a partir de 08 de Agosto de 2026.
+Esta política entra em vigor a partir de 04 de Outubro de 2026.

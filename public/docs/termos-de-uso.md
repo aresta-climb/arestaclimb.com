@@ -36,4 +36,4 @@ com a nossa Política de Privacidade, que detalha a forma como lidamos com a
 coleta anônima de dados de uso e permissões locais. Você pode acessá-la
 integralmente lendo a nossa [Política de Privacidade](/politica-de-privacidade).
 
-**6. Vigência:** Estes termos entram em vigor a partir de 08 de Agosto de 2026.
+**6. Vigência:** Estes termos entram em vigor a partir de 04 de Outubro de 2026.
