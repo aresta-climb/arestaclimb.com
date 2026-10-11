@@ -41,11 +41,13 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(idxFaq).toBeGreaterThan(idxCodigoAberto);
   });
 
-  it('editor.html deve conter o botão oficial da Microsoft Store, link do canal Beta e link do GitHub no footer', () => {
+  it('editor.html deve conter o botão oficial da Microsoft Store, instaladores macOS e Linux, link do canal Beta e link do GitHub no footer', () => {
     const html = fs.readFileSync('editor.html', 'utf8');
 
     expect(html).toContain('https://apps.microsoft.com/detail/9N6CQNH78WN8');
     expect(html).toContain('Microsoft Store');
+    expect(html).toContain('https://serving.arestaclimb.com/editor-macos/EditorAresta-latest.dmg');
+    expect(html).toContain('https://serving.arestaclimb.com/flatpak/com.arestaclimb.Editor.flatpakref');
     expect(html).toContain('id="themeToggle"');
     expect(html).toContain('href="/editor/beta"');
     expect(html).toContain('https://github.com/aresta-climb');

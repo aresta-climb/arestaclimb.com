@@ -57,11 +57,11 @@ A landing page DEVE apresentar princípios claros de respeito à autoria, preser
 - **ENTÃO** as diretrizes sobre consentimento, créditos aos conquistadores e canais de contato são exibidas
 
 ### Requirement: Apresentação e Download do Editor Aresta
-A landing page DEVE apresentar a ferramenta desktop oficial Editor Aresta para criação e edição de croquis vetoriais, com link direto para a página `/editor`.
+A landing page DEVE (SHALL) apresentar a ferramenta desktop oficial Editor Aresta para criação e edição de croquis vetoriais com suporte multiplataforma (Windows, Mac e Linux), disponibilizando chamada para ação ("Baixar para Windows, Mac e Linux") com link direto para a rota `/editor`.
 
 #### Scenario: Navegação para a página do Editor
-- **QUANDO** o usuário clica no botão ou link "Conhecer o Editor"
-- **ENTÃO** o navegador é direcionado para a rota `/editor`
+- **WHEN** o usuário clica no botão de download do editor ou no link "Conhecer o Editor" na página inicial
+- **THEN** o navegador é direcionado para a rota `/editor`
 
 ### Requirement: Seção de Código Aberto e Ecossistema Comunitário
 A landing page DEVE (MUST) apresentar uma seção dedicada com identificador semântico (`#codigo-aberto`) posicionada após a seção do Editor Aresta (`#editor`) e antes da seção de FAQ (`#faq`), comunicando de forma clara que o projeto é 100% open source, livre de barreiras proprietárias e construído pela comunidade de escalada. A seção DEVE (MUST) disponibilizar links de acesso externo e seguro para o repositório do aplicativo móvel (`aresta_app`), o repositório da base de dados (`aresta_db`) e a organização oficial no GitHub.

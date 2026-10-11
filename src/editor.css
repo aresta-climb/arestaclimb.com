@@ -245,6 +245,215 @@ a {
 .version-info {
   font-size: 0.88rem;
   color: var(--muted);
+  margin-top: 6px;
+}
+
+/* Plataforma: Abas WAI-ARIA */
+.platform-tabs-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 6px;
+  border-radius: var(--radius-full);
+  margin-bottom: 24px;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.platform-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.platform-tab-btn:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--line) 40%, transparent);
+}
+
+.platform-tab-btn.active {
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(181, 62, 41, 0.35);
+}
+
+.tab-badge-recomended {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+.platform-tab-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.platform-tab-panel[hidden] {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Badges Mac & Linux */
+.store-badge-mac,
+.store-badge-linux {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 32px;
+  border-radius: 18px;
+  background: #0d0e0b;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+
+.store-badge-mac:hover,
+.store-badge-linux:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.38);
+}
+
+/* Terminal Command Box */
+.linux-actions-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 580px;
+}
+
+.terminal-command-wrap {
+  width: 100%;
+  text-align: center;
+}
+
+.terminal-command-label {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono, monospace);
+}
+
+.terminal-command-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #141511;
+  border: 1px solid #35362e;
+  border-radius: 12px;
+  padding: 8px 12px 8px 16px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.terminal-command-box code {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.86rem;
+  color: #7fba00;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.btn-copy-cmd {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: #252620;
+  border: 1px solid #44453c;
+  color: #f3f0e8;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-copy-cmd:hover {
+  background: #35362e;
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.btn-copy-cmd.copied {
+  background: #1e3a1e;
+  border-color: #4caf50;
+  color: #a5d6a7;
+}
+
+/* Botões no Banner Final */
+.final-badges-group {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.btn-final-store {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  background: #1e1f1a;
+  border: 1px solid #44453c;
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-final-store:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(181, 62, 41, 0.35);
+}
+
+.thank-you-notice {
+  margin-top: 14px;
+  padding: 8px 16px;
+  background: rgba(76, 175, 80, 0.15);
+  border: 1px solid rgba(76, 175, 80, 0.4);
+  color: #4caf50;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 /* App Window Frame (Visual Hero Anchor) */

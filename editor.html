@@ -4,13 +4,13 @@
     <script>try{const t=localStorage.getItem('aresta-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aresta Climb — Editor Desktop na Microsoft Store</title>
-    <meta name="description" content="O Editor Aresta é a ferramenta desktop oficial para diagramar, traçar vias vetoriais sobre fotos de alta resolução e publicar croquis no app Aresta Climb. Disponível na Microsoft Store.">
+    <title>Aresta Climb — Editor Desktop para Windows, Mac e Linux</title>
+    <meta name="description" content="O Editor Aresta é a ferramenta desktop oficial para diagramar, traçar vias vetoriais sobre fotos de alta resolução e publicar croquis no app Aresta Climb. Disponível gratuitamente para Windows, macOS e Linux.">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Aresta Climb">
     <meta property="og:url" content="https://arestaclimb.com/editor">
     <meta property="og:title" content="Aresta Climb — Editor Desktop de Croquis">
-    <meta property="og:description" content="O Editor Aresta é a ferramenta desktop oficial para diagramar e traçar vias de escalada sobre fotos de alta resolução.">
+    <meta property="og:description" content="O Editor Aresta é a ferramenta desktop oficial para diagramar e traçar vias de escalada sobre fotos de alta resolução. Disponível para Windows, macOS e Linux.">
     <meta property="og:image" content="https://arestaclimb.com/og.png">
     <meta property="og:image:secure_url" content="https://arestaclimb.com/og.png">
     <meta property="og:image:type" content="image/png">
@@ -19,7 +19,7 @@
     <meta property="og:image:alt" content="Aresta Climb">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Aresta Climb — Editor Desktop de Croquis">
-    <meta name="twitter:description" content="O Editor Aresta é a ferramenta desktop oficial para diagramar e traçar vias de escalada sobre fotos de alta resolução.">
+    <meta name="twitter:description" content="O Editor Aresta é a ferramenta desktop oficial para diagramar e traçar vias de escalada sobre fotos de alta resolução. Disponível para Windows, macOS e Linux.">
     <meta name="twitter:image" content="https://arestaclimb.com/og.png">
     <link rel="icon" type="image/png" href="/assets/logo_app.png">
     <link rel="stylesheet" href="/src/editor.css" />
@@ -43,21 +43,88 @@
     <main class="container">
       <!-- Seção Hero -->
       <section class="hero">
-        <div class="eyebrow mono">FERRAMENTA DESKTOP OFICIAL · WINDOWS</div>
+        <div class="eyebrow mono">FERRAMENTA DESKTOP OFICIAL · WINDOWS, MAC &amp; LINUX</div>
         <h1>O poder de desenhar croquis de escalada.<br><span>Totalmente em suas mãos.</span></h1>
         <p class="lead">
           O <strong>Editor Aresta</strong> é o aplicativo desktop oficial para diagramar setores, traçar linhas vetoriais sobre fotos de alta resolução e publicar croquis interativos diretamente no app Aresta Climb.
         </p>
         
         <div class="hero-cta-group">
-          <a href="https://apps.microsoft.com/detail/9N6CQNH78WN8" target="_blank" rel="noopener" id="download-btn" class="store-badge-ms" aria-label="Obter na Microsoft Store" data-umami-event="download-editor" data-umami-event-plataforma="windows">
-            <svg viewBox="0 0 24 24" width="28" height="28" style="flex-shrink: 0;"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#00a4ef" d="M1 13h10v10H1z"/><path fill="#7fba00" d="M13 1h10v10H13z"/><path fill="#ffb900" d="M13 13h10v10H13z"/></svg>
-            <span class="store-badge-text" style="text-align: left;">
-              <small style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; display: block;">Obter na</small>
-              <strong style="font-size: 15px; font-weight: 800;">Microsoft Store</strong>
-            </span>
-          </a>
-          <div class="version-info">Gratuito · Requer Windows 10/11 (64-bits) · Atualizações automáticas</div>
+          <!-- Navegador de Abas de Plataforma -->
+          <div class="platform-tabs-nav" role="tablist" aria-label="Selecione seu sistema operacional">
+            <button role="tab" id="tab-btn-windows" aria-controls="panel-windows" aria-selected="true" class="platform-tab-btn active" data-platform="windows" tabindex="0">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M1 1h10v10H1z M1 13h10v10H1z M13 1h10v10H13z M13 13h10v10H13z"/></svg>
+              <span>Windows</span>
+              <span class="tab-badge-recomended" style="display: none;">Seu sistema</span>
+            </button>
+            <button role="tab" id="tab-btn-macos" aria-controls="panel-macos" aria-selected="false" class="platform-tab-btn" data-platform="macos" tabindex="-1">
+              <svg viewBox="0 0 384 512" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <span>macOS</span>
+              <span class="tab-badge-recomended" style="display: none;">Seu sistema</span>
+            </button>
+            <button role="tab" id="tab-btn-linux" aria-controls="panel-linux" aria-selected="false" class="platform-tab-btn" data-platform="linux" tabindex="-1">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14h2v2h-2zm0-10h2v8h-2z"/></svg>
+              <span>Linux (Flatpak)</span>
+              <span class="tab-badge-recomended" style="display: none;">Seu sistema</span>
+            </button>
+          </div>
+
+          <!-- Painel Windows -->
+          <div role="tabpanel" id="panel-windows" aria-labelledby="tab-btn-windows" class="platform-tab-panel active">
+            <a href="https://apps.microsoft.com/detail/9N6CQNH78WN8" target="_blank" rel="noopener" id="download-btn-windows" class="store-badge-ms" aria-label="Obter na Microsoft Store" data-umami-event="download-editor" data-umami-event-plataforma="windows">
+              <svg viewBox="0 0 24 24" width="28" height="28" style="flex-shrink: 0;"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#00a4ef" d="M1 13h10v10H1z"/><path fill="#7fba00" d="M13 1h10v10H13z"/><path fill="#ffb900" d="M13 13h10v10H13z"/></svg>
+              <span class="store-badge-text" style="text-align: left;">
+                <small style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; display: block;">Obter na</small>
+                <strong style="font-size: 15px; font-weight: 800;">Microsoft Store</strong>
+              </span>
+            </a>
+            <div class="version-info">Gratuito · Requer Windows 10/11 (64-bits) · Atualizações automáticas</div>
+            <div class="beta-channel-link" style="margin-top: 14px; font-size: 0.88rem;">
+              <a href="/editor/beta" style="color: var(--muted); text-decoration: underline;">Quer testar novidades em primeira mão? Conheça o <strong>Editor Aresta (Beta)</strong> &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Painel macOS -->
+          <div role="tabpanel" id="panel-macos" aria-labelledby="tab-btn-macos" class="platform-tab-panel" hidden>
+            <a href="https://serving.arestaclimb.com/editor-macos/EditorAresta-latest.dmg" download id="download-btn-macos" class="store-badge-mac" aria-label="Baixar para Mac (Apple Silicon)" data-umami-event="download-editor" data-umami-event-plataforma="macos">
+              <svg viewBox="0 0 384 512" width="26" height="26" style="flex-shrink: 0;" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <span class="store-badge-text" style="text-align: left;">
+                <small style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; display: block;">Baixar para Mac</small>
+                <strong style="font-size: 15px; font-weight: 800;">Imagem DMG (.dmg)</strong>
+              </span>
+            </a>
+            <div class="version-info">Gratuito · Nativo para Apple Silicon (M1/M2/M3/M4+) · Notarizado pela Apple · Atualizações via Sparkle</div>
+            <p class="install-hint" style="margin-top: 12px; font-size: 0.85rem; color: var(--muted);">
+              Ao baixar, abra a imagem <code>.dmg</code> e arraste o <strong>Editor Aresta</strong> para a pasta <strong>Aplicativos</strong>.
+            </p>
+          </div>
+
+          <!-- Painel Linux -->
+          <div role="tabpanel" id="panel-linux" aria-labelledby="tab-btn-linux" class="platform-tab-panel" hidden>
+            <div class="linux-actions-group">
+              <a href="https://serving.arestaclimb.com/flatpak/com.arestaclimb.Editor.flatpakref" download id="download-btn-linux" class="store-badge-linux" aria-label="Instalar via Flatpak" data-umami-event="download-editor" data-umami-event-plataforma="linux">
+                <svg viewBox="0 0 24 24" width="26" height="26" style="flex-shrink: 0;" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+                <span class="store-badge-text" style="text-align: left;">
+                  <small style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; display: block;">Instalação em 1 clique</small>
+                  <strong style="font-size: 15px; font-weight: 800;">Instalar via Flatpak</strong>
+                </span>
+              </a>
+
+              <div class="terminal-command-wrap">
+                <div class="terminal-command-label">Ou instale via terminal:</div>
+                <div class="terminal-command-box">
+                  <code id="flatpak-install-cmd">flatpak install https://serving.arestaclimb.com/flatpak/com.arestaclimb.Editor.flatpakref</code>
+                  <button id="btn-copy-flatpak" class="btn-copy-cmd" data-clipboard-target="#flatpak-install-cmd" aria-label="Copiar comando de instalação do Flatpak" data-umami-event="copiar-comando-terminal" data-umami-event-plataforma="linux">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <span class="btn-copy-text">Copiar</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="version-info">Gratuito · Qualquer distro Linux com Flatpak · Wayland &amp; X11 · Atualizações automáticas via OSTree</div>
+          </div>
+
+          <div id="thank-you-msg" style="display: none;" class="thank-you-notice">Obrigado por baixar o Editor Aresta! Bom traçado de vias!</div>
         </div>
       </section>
 
@@ -139,17 +206,23 @@
       <!-- Banner Final -->
       <section class="final-banner">
         <h2>Pronto para documentar as vias do seu pico?</h2>
-        <p>Baixe o Editor Aresta gratuitamente na Microsoft Store e comece a desenhar croquis interativos hoje mesmo.</p>
-        <a href="https://apps.microsoft.com/detail/9N6CQNH78WN8" target="_blank" rel="noopener" class="store-badge-ms" aria-label="Obter na Microsoft Store">
-          <svg viewBox="0 0 24 24" width="28" height="28" style="flex-shrink: 0;"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#00a4ef" d="M1 13h10v10H1z"/><path fill="#7fba00" d="M13 1h10v10H13z"/><path fill="#ffb900" d="M13 13h10v10H13z"/></svg>
-          <span class="store-badge-text" style="text-align: left;">
-            <small style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; display: block;">Obter na</small>
-            <strong style="font-size: 15px; font-weight: 800;">Microsoft Store</strong>
-          </span>
-        </a>
+        <p>O Editor Aresta está disponível gratuitamente para Windows, macOS e Linux. Escolha seu sistema e comece a desenhar croquis hoje mesmo.</p>
+        
+        <div class="final-badges-group">
+          <a href="https://apps.microsoft.com/detail/9N6CQNH78WN8" target="_blank" rel="noopener" class="btn-final-store" aria-label="Obter na Microsoft Store" data-umami-event="download-editor" data-umami-event-plataforma="windows">
+            Windows (Microsoft Store)
+          </a>
+          <a href="https://serving.arestaclimb.com/editor-macos/EditorAresta-latest.dmg" download class="btn-final-store" aria-label="Baixar para Mac (Apple Silicon)" data-umami-event="download-editor" data-umami-event-plataforma="macos">
+            macOS (.dmg)
+          </a>
+          <a href="https://serving.arestaclimb.com/flatpak/com.arestaclimb.Editor.flatpakref" download class="btn-final-store" aria-label="Instalar via Flatpak" data-umami-event="download-editor" data-umami-event-plataforma="linux">
+            Linux (Flatpak)
+          </a>
+        </div>
+
         <div class="beta-channel-link" style="margin-top: 24px; font-size: 0.95rem;">
           <a href="/editor/beta" style="color: var(--muted); text-decoration: underline; transition: color 0.2s;">
-            Quer testar novidades em primeira mão? Conheça o <strong>Editor Aresta (Beta)</strong> &rarr;
+            Usuário Windows e quer testar novidades em primeira mão? Conheça o <strong>Editor Aresta (Beta)</strong> &rarr;
           </a>
         </div>
       </section>
