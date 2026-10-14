@@ -1,0 +1,4 @@
+# Flathub app verification for arestaclimb.com
+# https://docs.flathub.org/docs/for-app-authors/verification#website
+
+# com.arestaclimb.Editor

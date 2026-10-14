@@ -97,7 +97,7 @@ describe('editor.js - setupPlatformTabs', () => {
           macOS <span class="tab-badge-recomended" style="display:none">Seu sistema</span>
         </button>
         <button role="tab" id="tab-btn-linux" aria-controls="panel-linux" aria-selected="false" class="platform-tab-btn" data-platform="linux">
-          Linux (Flatpak) <span class="tab-badge-recomended" style="display:none">Seu sistema</span>
+          Linux <span class="tab-badge-recomended" style="display:none">Seu sistema</span>
         </button>
       </div>
 
