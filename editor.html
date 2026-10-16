@@ -86,14 +86,24 @@
 
           <!-- Painel macOS -->
           <div role="tabpanel" id="panel-macos" aria-labelledby="tab-btn-macos" class="platform-tab-panel" hidden>
-            <a href="https://serving.arestaclimb.com/editor-macos/EditorAresta-latest.dmg" download id="download-btn-macos" class="store-badge-mac" aria-label="Baixar para Mac (Apple Silicon)" data-umami-event="download-editor" data-umami-event-plataforma="macos">
-              <svg viewBox="0 0 384 512" width="26" height="26" style="flex-shrink: 0;" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-              <span class="store-badge-text" style="text-align: left;">
-                <small style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; display: block;">Baixar para Mac</small>
-                <strong style="font-size: 15px; font-weight: 800;">Imagem DMG (.dmg)</strong>
-              </span>
-            </a>
-            <div class="version-info">Gratuito · Nativo para Apple Silicon (M1/M2/M3/M4+) · Notarizado pela Apple · Atualizações via Sparkle</div>
+            <div class="macos-actions-group">
+              <a href="https://serving.arestaclimb.com/editor-macos/EditorAresta-latest.dmg" download id="download-btn-macos-arm64" class="store-badge-mac" aria-label="Baixar para Mac (Apple Silicon)" data-umami-event="download-editor" data-umami-event-plataforma="macos" data-umami-event-arquitetura="arm64">
+                <svg viewBox="0 0 384 512" width="26" height="26" style="flex-shrink: 0;" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                <span class="store-badge-text" style="text-align: left;">
+                  <small style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; display: block;">Baixar para Mac</small>
+                  <strong style="font-size: 15px; font-weight: 800;">Apple Silicon (M1/M2/M3/M4+)</strong>
+                </span>
+              </a>
+
+              <a href="https://serving.arestaclimb.com/editor-macos/EditorAresta-intel-latest.dmg" download id="download-btn-macos-intel" class="store-badge-mac store-badge-mac-intel" aria-label="Baixar para Mac (Intel)" data-umami-event="download-editor" data-umami-event-plataforma="macos" data-umami-event-arquitetura="intel">
+                <svg viewBox="0 0 384 512" width="26" height="26" style="flex-shrink: 0;" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                <span class="store-badge-text" style="text-align: left;">
+                  <small style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; display: block;">Baixar para Mac</small>
+                  <strong style="font-size: 15px; font-weight: 800;">Intel (Core i5/i7/i9/Xeon)</strong>
+                </span>
+              </a>
+            </div>
+            <div class="version-info">Gratuito · Binários nativos para Apple Silicon e Intel · Notarizado pela Apple · Atualizações via Sparkle</div>
             <p class="install-hint" style="margin-top: 12px; font-size: 0.85rem; color: var(--muted);">
               Ao baixar, abra a imagem <code>.dmg</code> e arraste o <strong>Editor Aresta</strong> para a pasta <strong>Aplicativos</strong>.
             </p>
@@ -212,8 +222,11 @@
           <a href="https://apps.microsoft.com/detail/9N6CQNH78WN8" target="_blank" rel="noopener" class="btn-final-store" aria-label="Obter na Microsoft Store" data-umami-event="download-editor" data-umami-event-plataforma="windows">
             Windows (Microsoft Store)
           </a>
-          <a href="https://serving.arestaclimb.com/editor-macos/EditorAresta-latest.dmg" download class="btn-final-store" aria-label="Baixar para Mac (Apple Silicon)" data-umami-event="download-editor" data-umami-event-plataforma="macos">
-            macOS (.dmg)
+          <a href="https://serving.arestaclimb.com/editor-macos/EditorAresta-latest.dmg" download class="btn-final-store" aria-label="Baixar para Mac (Apple Silicon)" data-umami-event="download-editor" data-umami-event-plataforma="macos" data-umami-event-arquitetura="arm64">
+            macOS (Apple Silicon)
+          </a>
+          <a href="https://serving.arestaclimb.com/editor-macos/EditorAresta-intel-latest.dmg" download class="btn-final-store" aria-label="Baixar para Mac (Intel)" data-umami-event="download-editor" data-umami-event-plataforma="macos" data-umami-event-arquitetura="intel">
+            macOS (Intel)
           </a>
           <a href="https://serving.arestaclimb.com/flatpak/com.arestaclimb.Editor.flatpakref" download class="btn-final-store" aria-label="Instalar via Flatpak" data-umami-event="download-editor" data-umami-event-plataforma="linux">
             Linux (Flatpak)

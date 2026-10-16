@@ -351,6 +351,35 @@ a {
   box-shadow: 0 16px 45px rgba(0, 0, 0, 0.38);
 }
 
+/* Grupo de botões macOS lado a lado */
+.macos-actions-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 720px;
+}
+
+.macos-actions-group .store-badge-mac {
+  flex: 1 1 280px;
+  max-width: 340px;
+  padding: 14px 22px;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .macos-actions-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .macos-actions-group .store-badge-mac {
+    max-width: 100%;
+  }
+}
+
 /* Terminal Command Box */
 .linux-actions-group {
   display: flex;

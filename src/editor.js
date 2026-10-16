@@ -3,18 +3,24 @@ import './theme.js';
 import './telemetry.js';
 
 export function setupDownloadButton() {
-  const downloadBtn = document.getElementById('download-btn');
   const thankYouMsg = document.getElementById('thank-you-msg');
+  if (!thankYouMsg) return;
 
-  if (downloadBtn && thankYouMsg) {
-    downloadBtn.addEventListener('click', () => {
+  const downloadButtons = document.querySelectorAll(
+    '#download-btn, #download-btn-windows, #download-btn-macos, #download-btn-macos-arm64, #download-btn-macos-intel, #download-btn-linux, .store-badge-mac'
+  );
+
+  let timeoutId = null;
+  downloadButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
       console.log('Download do Editor Aresta iniciado!');
       thankYouMsg.style.display = 'block';
-      setTimeout(() => {
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
         thankYouMsg.style.display = 'none';
       }, 8000);
     });
-  }
+  });
 }
 
 /**

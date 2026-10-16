@@ -177,6 +177,34 @@ describe("telemetry.js - Módulo de Telemetria Client-Side (Umami)", () => {
 
       expect(mockTrack).not.toHaveBeenCalled();
     });
+
+    it("deve rastrear cliques de download do editor contendo plataforma e arquitetura (arm64 e intel)", () => {
+      const mockTrack = vi.fn();
+      window.umami = { track: mockTrack };
+
+      document.body.innerHTML = `
+        <a id="btn-mac-arm" href="#" data-umami-event="download-editor" data-umami-event-plataforma="macos" data-umami-event-arquitetura="arm64">
+          Apple Silicon
+        </a>
+        <a id="btn-mac-intel" href="#" data-umami-event="download-editor" data-umami-event-plataforma="macos" data-umami-event-arquitetura="intel">
+          Intel
+        </a>
+      `;
+
+      setupDeclarativeTracking(document.body);
+
+      document.getElementById("btn-mac-arm").click();
+      expect(mockTrack).toHaveBeenCalledWith("download-editor", {
+        plataforma: "macos",
+        arquitetura: "arm64",
+      });
+
+      document.getElementById("btn-mac-intel").click();
+      expect(mockTrack).toHaveBeenCalledWith("download-editor", {
+        plataforma: "macos",
+        arquitetura: "intel",
+      });
+    });
   });
 
   describe("initTelemetry", () => {

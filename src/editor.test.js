@@ -35,6 +35,29 @@ describe('editor.js - Landing Page Logic', () => {
     expect(thankYouMsg.style.display).toBe('none');
   });
 
+  it('deve exibir a mensagem de agradecimento ao clicar nos botões macOS Apple Silicon e Intel', () => {
+    document.body.innerHTML = `
+      <a href="#" id="download-btn-macos-arm64" class="store-badge-mac">ARM64</a>
+      <a href="#" id="download-btn-macos-intel" class="store-badge-mac">Intel</a>
+      <div id="thank-you-msg" style="display: none;">Obrigado!</div>
+    `;
+
+    setupDownloadButton();
+
+    const btnArm = document.getElementById('download-btn-macos-arm64');
+    const btnIntel = document.getElementById('download-btn-macos-intel');
+    const thankYouMsg = document.getElementById('thank-you-msg');
+
+    btnArm.click();
+    expect(thankYouMsg.style.display).toBe('block');
+
+    btnIntel.click();
+    expect(thankYouMsg.style.display).toBe('block');
+
+    vi.advanceTimersByTime(8000);
+    expect(thankYouMsg.style.display).toBe('none');
+  });
+
   it('não deve quebrar se os elementos de download não existirem no DOM', () => {
     document.body.innerHTML = '';
     expect(() => setupDownloadButton()).not.toThrow();

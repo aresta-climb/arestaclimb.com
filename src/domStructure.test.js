@@ -41,12 +41,15 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(idxFaq).toBeGreaterThan(idxCodigoAberto);
   });
 
-  it('editor.html deve conter o botão oficial da Microsoft Store, instaladores macOS e Linux, link do canal Beta e link do GitHub no footer', () => {
+  it('editor.html deve conter o botão oficial da Microsoft Store, instaladores macOS (Apple Silicon e Intel) e Linux, link do canal Beta e link do GitHub no footer', () => {
     const html = fs.readFileSync('editor.html', 'utf8');
 
     expect(html).toContain('https://apps.microsoft.com/detail/9N6CQNH78WN8');
     expect(html).toContain('Microsoft Store');
     expect(html).toContain('https://serving.arestaclimb.com/editor-macos/EditorAresta-latest.dmg');
+    expect(html).toContain('https://serving.arestaclimb.com/editor-macos/EditorAresta-intel-latest.dmg');
+    expect(html).toContain('Apple Silicon (M1/M2/M3/M4+)');
+    expect(html).toContain('Intel (Core i5/i7/i9/Xeon)');
     expect(html).toContain('https://serving.arestaclimb.com/flatpak/com.arestaclimb.Editor.flatpakref');
     expect(html).toContain('id="themeToggle"');
     expect(html).toContain('href="/editor/beta"');
