@@ -51,6 +51,7 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(html).toContain('Apple Silicon (M1/M2/M3/M4+)');
     expect(html).toContain('Intel (Core i5/i7/i9/Xeon)');
     expect(html).toContain('https://serving.arestaclimb.com/flatpak/com.arestaclimb.Editor.flatpakref');
+    expect(html).toContain('https://flatpak.org/setup/');
     expect(html).toContain('id="themeToggle"');
     expect(html).toContain('href="/editor/beta"');
     expect(html).toContain('https://github.com/aresta-climb');

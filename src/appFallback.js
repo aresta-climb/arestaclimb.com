@@ -33,15 +33,15 @@ export function formatarSlug(slug) {
     return '';
   }
 
-  // Tratamento de prefixos geográficos de pico: br_uf_municipio_nome
+  // Tratamento de prefixos geográficos de pico: br_estado_cidade_nome
   const matchGeo = slug.match(/^([a-z]{2})_([a-z]{2})_(.+)$/i);
   if (matchGeo) {
-    const uf = matchGeo[2].toUpperCase();
+    const estado = matchGeo[2].toUpperCase();
     const partes = matchGeo[3]
       .split('_')
       .filter(Boolean)
       .map((p) => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase());
-    return `${partes.join(' ')} (${uf})`;
+    return `${partes.join(' ')} (${estado})`;
   }
 
   return slug
