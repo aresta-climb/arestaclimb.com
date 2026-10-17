@@ -46,7 +46,7 @@ Os documentos legais de origem ficam na pasta `/public/docs/`. O arquivo JavaScr
    ```bash
    npm run test
    ```
-   *(Também garantimos a cobertura total dos testes com `npm run coverage`)*
+   *(Seguimos rigorosamente os nossos [Princípios de Engenharia](AGENTS.md) e garantimos 100% de cobertura com `npm run coverage`)*
 
 ## 🌐 Build e Deploy (Cloudflare Pages)
 
