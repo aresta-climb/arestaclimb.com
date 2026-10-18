@@ -1,0 +1,13 @@
+# Regras de rastreamento para serving.arestaclimb.com (Storage / CDN)
+# Permite indexação de arquivos de imagem vinculados, mas bloqueia dados (.binarypb, .yaml/.yml) e instaladores.
+User-agent: *
+Disallow: /*.binarypb$
+Disallow: /*.binarypb?*
+Disallow: /*.yaml$
+Disallow: /*.yaml?*
+Disallow: /*.yml$
+Disallow: /*.yml?*
+Disallow: /editor-macos/
+Disallow: /editor-beta/
+Disallow: /flatpak/
+Allow: /

@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import { plugin404 } from './src/vitePlugin404.js';
+import { pluginSitemap } from './src/vitePluginSitemap.js';
 
 export default defineConfig({
   appType: 'mpa',
-  plugins: [plugin404()],
+  plugins: [plugin404(), pluginSitemap()],
   build: {
     rollupOptions: {
       input: {

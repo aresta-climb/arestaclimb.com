@@ -81,7 +81,8 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
       'termos-de-uso-fixlog.html',
       'politica-de-privacidade-fixlog.html',
       'comunidade.html',
-      '404.html'
+      '404.html',
+      'editor/beta/index.html'
     ];
 
     pages.forEach(p => {
@@ -125,7 +126,7 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(html).toContain('src="/src/notFound.js"');
   });
 
-  it('vite.config.js deve registrar os pontos de entrada MPA do FixLog, Comunidade e da página 404', () => {
+  it('vite.config.js deve registrar os pontos de entrada MPA do FixLog, Comunidade e da página 404, além dos plugins 404 e Sitemap', () => {
     const configContent = fs.readFileSync('vite.config.js', 'utf8');
 
     expect(configContent).toContain('termosDeUsoFixlog:');
@@ -134,6 +135,7 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(configContent).toContain('notFound:');
     expect(configContent).toContain("appType: 'mpa'");
     expect(configContent).toContain('plugin404');
+    expect(configContent).toContain('pluginSitemap');
   });
 
   it('todas as páginas HTML devem conter links para a Google Play e Apple App Store', () => {
@@ -179,4 +181,91 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(contatoMd).toContain('https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA');
     expect(contatoMd).not.toContain('Ip28rjQj4YbHgPgtN5Arcv');
   });
+
+  it('todas as 11 páginas públicas indexáveis devem declarar <link rel="canonical"> exato sem www e sem noindex', () => {
+    const paginasIndexaveis = [
+      { arquivo: 'index.html', urlCanonica: 'https://arestaclimb.com/' },
+      { arquivo: 'app.html', urlCanonica: 'https://arestaclimb.com/app' },
+      { arquivo: 'editor.html', urlCanonica: 'https://arestaclimb.com/editor' },
+      { arquivo: 'editor/beta/index.html', urlCanonica: 'https://arestaclimb.com/editor/beta' },
+      { arquivo: 'contato.html', urlCanonica: 'https://arestaclimb.com/contato' },
+      { arquivo: 'termos-de-uso.html', urlCanonica: 'https://arestaclimb.com/termos-de-uso' },
+      { arquivo: 'politica-de-privacidade.html', urlCanonica: 'https://arestaclimb.com/politica-de-privacidade' },
+      { arquivo: 'politica-de-privacidade-editor.html', urlCanonica: 'https://arestaclimb.com/politica-de-privacidade-editor' },
+      { arquivo: 'privacidade-contribuidores.html', urlCanonica: 'https://arestaclimb.com/privacidade-contribuidores' },
+      { arquivo: 'termos-de-uso-fixlog.html', urlCanonica: 'https://arestaclimb.com/termos-de-uso-fixlog' },
+      { arquivo: 'politica-de-privacidade-fixlog.html', urlCanonica: 'https://arestaclimb.com/politica-de-privacidade-fixlog' }
+    ];
+
+    for (const { arquivo, urlCanonica } of paginasIndexaveis) {
+      const html = fs.readFileSync(arquivo, 'utf8');
+      expect(html).toContain(`<link rel="canonical" href="${urlCanonica}">`);
+      expect(html).not.toContain('noindex');
+    }
+  });
+
+  it('as 4 páginas utilitárias e de redirecionamento devem declarar <meta name="robots" content="noindex, nofollow">', () => {
+    const paginasNaoIndexaveis = [
+      '404.html',
+      'download.html',
+      'comunidade.html',
+      'editor/beta/certificado-instalado/index.html'
+    ];
+
+    for (const arquivo of paginasNaoIndexaveis) {
+      const html = fs.readFileSync(arquivo, 'utf8');
+      expect(html).toContain('<meta name="robots" content="noindex, nofollow">');
+      expect(html).not.toContain('rel="canonical"');
+    }
+  });
+
+  it('todos os links de instaladores apontando para serving.arestaclimb.com devem possuir rel="nofollow"', () => {
+    const paginasComDownloads = [
+      'editor.html',
+      'editor/beta/index.html',
+      'editor/beta/certificado-instalado/index.html'
+    ];
+
+    for (const arquivo of paginasComDownloads) {
+      const html = fs.readFileSync(arquivo, 'utf8');
+      const tagsLinkServing = html.match(/<a\s+[^>]*href="https:\/\/serving\.arestaclimb\.com\/[^"]+"[^>]*>/g) || [];
+      expect(tagsLinkServing.length).toBeGreaterThan(0);
+      for (const tag of tagsLinkServing) {
+        expect(tag).toContain('rel="nofollow"');
+      }
+    }
+  });
+
+  it('o rodapé institucional de index.html deve conter links diretos para /editor/beta, /privacidade-contribuidores e /contato', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+
+    expect(html).toContain('href="/editor/beta"');
+    expect(html).toContain('href="/privacidade-contribuidores"');
+    expect(html).toContain('href="/contato"');
+  });
+
+  it('public/robots.txt deve permitir rastreamento e referenciar https://arestaclimb.com/sitemap.xml', () => {
+    const robots = fs.readFileSync('public/robots.txt', 'utf8');
+
+    expect(robots).toContain('User-agent: *');
+    expect(robots).toContain('Allow: /');
+    expect(robots).toContain('Sitemap: https://arestaclimb.com/sitemap.xml');
+  });
+
+  it('public/serving-robots.txt deve permitir imagens e bloquear arquivos .binarypb, .yaml/.yml e pastas de instaladores', () => {
+    const servingRobots = fs.readFileSync('public/serving-robots.txt', 'utf8');
+
+    expect(servingRobots).toContain('User-agent: *');
+    expect(servingRobots).toContain('Disallow: /*.binarypb$');
+    expect(servingRobots).toContain('Disallow: /*.binarypb?*');
+    expect(servingRobots).toContain('Disallow: /*.yaml$');
+    expect(servingRobots).toContain('Disallow: /*.yaml?*');
+    expect(servingRobots).toContain('Disallow: /*.yml$');
+    expect(servingRobots).toContain('Disallow: /*.yml?*');
+    expect(servingRobots).toContain('Disallow: /editor-macos/');
+    expect(servingRobots).toContain('Disallow: /editor-beta/');
+    expect(servingRobots).toContain('Disallow: /flatpak/');
+    expect(servingRobots).toContain('Allow: /');
+  });
 });
+
