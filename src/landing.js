@@ -5,7 +5,10 @@
 
 import { THEME_KEY, getPreferredTheme, setTheme, toggleTheme, initTheme } from './theme.js';
 import './telemetry.js';
+import { inicializarMonitoramentoErrosSentry } from './telemetria.js';
 export { THEME_KEY, getPreferredTheme, setTheme, toggleTheme, initTheme };
+
+inicializarMonitoramentoErrosSentry({ servico: 'aresta-web' });
 
 export const SHOWCASE_ITEMS = [
   {

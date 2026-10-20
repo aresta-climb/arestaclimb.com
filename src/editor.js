@@ -1,6 +1,9 @@
 import './editor.css';
 import './theme.js';
 import './telemetry.js';
+import { inicializarMonitoramentoErrosSentry } from './telemetria.js';
+
+inicializarMonitoramentoErrosSentry({ servico: 'aresta-editor-web' });
 
 export function setupDownloadButton() {
   const thankYouMsg = document.getElementById('thank-you-msg');
