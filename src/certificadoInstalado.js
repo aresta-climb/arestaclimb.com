@@ -3,6 +3,8 @@
  * Client-Side First: Valida parâmetros de origem e impressão digital SHA-256 do certificado.
  */
 
+import { inicializarMonitoramentoErrosSentry } from './telemetria.js';
+
 export const URL_REDIRECIONAMENTO_PADRAO = '/editor/beta';
 
 // Hashes SHA-256 autorizadas do certificado do Editor Aresta Beta
@@ -75,6 +77,11 @@ export function processarParametrosCertificado({
  * @param {Object} [options]
  */
 export function setupCertificadoInstalado(options = {}) {
+  inicializarMonitoramentoErrosSentry({
+    alvoGlobal: options.alvoGlobalErros,
+    servico: 'aresta-editor-beta',
+  });
+
   const doc = typeof document !== 'undefined' ? document : null;
   const win = typeof window !== 'undefined' ? window : null;
   const search = win && win.location ? win.location.search : '';

@@ -230,4 +230,16 @@ describe("certificadoInstalado.js - Validação de Instalação do Certificado B
 
     expect(document.getElementById("success-state").style.display).toBe("block");
   });
+
+  it("deve inicializar o monitoramento de erros Sentry no alvo global", () => {
+    const eventos = [];
+    const mockAlvo = {
+      addEventListener: (tipo) => eventos.push(tipo),
+      removeEventListener: () => {},
+    };
+
+    setupCertificadoInstalado({ alvoGlobalErros: mockAlvo });
+    expect(eventos).toContain("error");
+    expect(eventos).toContain("unhandledrejection");
+  });
 });

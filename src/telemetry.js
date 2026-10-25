@@ -3,6 +3,8 @@
  * Integração resiliente, sem cookies e orientada à privacidade com Umami Analytics.
  */
 
+import { inicializarMonitoramentoErrosSentry } from './telemetria.js';
+
 /**
  * Dispara um evento customizado de telemetria para o Umami de forma resiliente.
  * @param {string} eventName - Nome semântico do evento
@@ -272,6 +274,11 @@ export function initTelemetry(options = {}) {
   if (options.autoTrackPageView) {
     trackPageView();
   }
+
+  inicializarMonitoramentoErrosSentry({
+    alvoGlobal: options.alvoGlobalErros,
+    servico: options.servicoErros || 'aresta-web',
+  });
 }
 
 if (typeof document !== 'undefined') {

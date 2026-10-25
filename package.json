@@ -13,6 +13,7 @@
     "test:watch": "vitest"
   },
   "devDependencies": {
+    "@sentry/vite-plugin": "^11.9.0",
     "@vitest/coverage-v8": "^4.1.9",
     "jsdom": "^29.1.1",
     "jsqr": "^1.4.0",

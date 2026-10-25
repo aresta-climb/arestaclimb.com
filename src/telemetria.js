@@ -9,6 +9,12 @@
 const PADRAO_ERRO_REDE = /failed to fetch|networkerror|load failed|erro de rede/i;
 
 /**
+ * DSN oficial do projeto `arestaclimb-com` no Sentry.
+ */
+export const DSN_SENTRY_WEB_PADRAO =
+  "https://274a2060ad47e642a33317bea66a6b13@o4511980548849664.ingest.us.sentry.io/4512313437913088";
+
+/**
  * Extrai a configuração de ingestão a partir de uma string DSN do Sentry.
  * @param {string | null | undefined} dsn
  * @returns {{ chavePublica: string, idProjeto: string, urlEnvelope: string } | null}
@@ -126,6 +132,72 @@ export function extrairQuadrosPilhaNavegador(pilha) {
 }
 
 /**
+ * Extrai a lista de imagens para resolução de Source Maps via Debug IDs (`debug_meta.images`).
+ * Lê os mapas `_sentryDebugIds` e `_debugIds` injetados no escopo global durante o build do Vite,
+ * associando cada quadro da exceção ao UUID do chunk correspondente.
+ *
+ * @param {Array<{ filename: string }> | null | undefined} quadros
+ * @param {Record<string, any> | null | undefined} [objetoGlobal]
+ * @returns {Array<{ type: 'sourcemap', code_file: string, debug_id: string }>}
+ */
+export function extrairImagensDebugMeta(
+  quadros,
+  objetoGlobal = typeof window !== "undefined"
+    ? window
+    : typeof globalThis !== "undefined"
+    ? globalThis
+    : null
+) {
+  if (!quadros || !quadros.length || !objetoGlobal) {
+    return [];
+  }
+
+  const mapaDebugIdsSentry = objetoGlobal._sentryDebugIds;
+  const mapaDebugIdsPadrao = objetoGlobal._debugIds;
+
+  if (!mapaDebugIdsSentry && !mapaDebugIdsPadrao) {
+    return [];
+  }
+
+  const mapaArquivoParaDebugId = new Map();
+
+  const processarMapa = (mapa) => {
+    if (!mapa || typeof mapa !== "object") return;
+    for (const [chavePilha, debugId] of Object.entries(mapa)) {
+      if (typeof debugId !== "string" || !debugId) continue;
+      const quadrosChave = extrairQuadrosPilhaNavegador(chavePilha);
+      const ultimoQuadro = quadrosChave[quadrosChave.length - 1];
+      if (ultimoQuadro && ultimoQuadro.filename) {
+        mapaArquivoParaDebugId.set(ultimoQuadro.filename, debugId);
+      }
+    }
+  };
+
+  processarMapa(mapaDebugIdsSentry);
+  processarMapa(mapaDebugIdsPadrao);
+
+  const arquivosProcessados = new Set();
+  const imagens = [];
+
+  for (const quadro of quadros) {
+    const arquivo = quadro && quadro.filename;
+    if (arquivo && !arquivosProcessados.has(arquivo)) {
+      arquivosProcessados.add(arquivo);
+      const debugId = mapaArquivoParaDebugId.get(arquivo);
+      if (debugId) {
+        imagens.push({
+          type: "sourcemap",
+          code_file: arquivo,
+          debug_id: debugId,
+        });
+      }
+    }
+  }
+
+  return imagens;
+}
+
+/**
  * Gera um identificador hexadecimal de 32 caracteres para o evento do Sentry.
  * @returns {string}
  */
@@ -155,7 +227,7 @@ export async function enviarExcecaoSentryWeb(erro, opcoes = {}) {
         (typeof import.meta !== "undefined" &&
           import.meta.env &&
           import.meta.env.VITE_SENTRY_DSN) ||
-        "";
+        DSN_SENTRY_WEB_PADRAO;
 
   const config = extrairConfiguracaoDsnSentry(dsnEfetivo);
   if (!config) {
@@ -181,6 +253,14 @@ export async function enviarExcecaoSentryWeb(erro, opcoes = {}) {
     ? erro
     : JSON.stringify(erro);
   const quadros = ehInstanciaErro ? extrairQuadrosPilhaNavegador(erro.stack) : [];
+
+  const objetoGlobal =
+    typeof window !== "undefined"
+      ? window
+      : typeof globalThis !== "undefined"
+      ? globalThis
+      : null;
+  const imagensDebugMeta = extrairImagensDebugMeta(quadros, objetoGlobal);
 
   const eventId = gerarIdEventoHex();
   const timestamp = new Date().toISOString();
@@ -215,6 +295,9 @@ export async function enviarExcecaoSentryWeb(erro, opcoes = {}) {
         },
       ],
     },
+    ...(imagensDebugMeta.length > 0
+      ? { debug_meta: { images: imagensDebugMeta } }
+      : {}),
   };
 
   const cabecalhoEnvelope = JSON.stringify({
@@ -244,6 +327,8 @@ export async function enviarExcecaoSentryWeb(erro, opcoes = {}) {
   }
 }
 
+const alvosMonitorados = new WeakSet();
+
 /**
  * Registra ouvintes globais (`error` e `unhandledrejection`) na janela do navegador
  * para reportar exceções não tratadas ao Sentry.
@@ -268,6 +353,11 @@ export function inicializarMonitoramentoErrosSentry(opcoes = {}) {
     return () => {};
   }
 
+  if (alvosMonitorados.has(alvo)) {
+    return () => {};
+  }
+  alvosMonitorados.add(alvo);
+
   const aoOcorrerErro = (evento) => {
     const erroExtraido =
       evento && evento.error
@@ -285,6 +375,7 @@ export function inicializarMonitoramentoErrosSentry(opcoes = {}) {
   alvo.addEventListener("unhandledrejection", aoRejeitarPromise);
 
   return () => {
+    alvosMonitorados.delete(alvo);
     alvo.removeEventListener("error", aoOcorrerErro);
     alvo.removeEventListener("unhandledrejection", aoRejeitarPromise);
   };

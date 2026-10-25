@@ -282,6 +282,18 @@ describe("telemetry.js - Módulo de Telemetria Client-Side (Umami)", () => {
       document.getElementById("btn-custom").click();
       expect(mockTrack).toHaveBeenCalledWith("custom-ev", {});
     });
+
+    it("deve inicializar o monitoramento de erros Sentry no alvo global ao chamar initTelemetry", () => {
+      const eventos = [];
+      const mockAlvo = {
+        addEventListener: (tipo) => eventos.push(tipo),
+        removeEventListener: () => {},
+      };
+
+      initTelemetry({ alvoGlobalErros: mockAlvo });
+      expect(eventos).toContain("error");
+      expect(eventos).toContain("unhandledrejection");
+    });
   });
 
   describe("setupAutoLinkTracking", () => {

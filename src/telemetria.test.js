@@ -3,6 +3,7 @@ import {
   extrairConfiguracaoDsnSentry,
   ehErroDeRedeOffline,
   extrairQuadrosPilhaNavegador,
+  extrairImagensDebugMeta,
   enviarExcecaoSentryWeb,
   inicializarMonitoramentoErrosSentry,
 } from "./telemetria.js";
@@ -10,6 +11,8 @@ import {
 describe("telemetria.js - Monitoramento de Exceções Client-Side (Sentry Envelope)", () => {
   beforeEach(() => {
     delete window.__ARESTA_SENTRY_DSN__;
+    delete window._sentryDebugIds;
+    delete window._debugIds;
   });
 
   afterEach(() => {
@@ -101,34 +104,151 @@ describe("telemetria.js - Monitoramento de Exceções Client-Side (Sentry Envelo
     });
   });
 
+  describe("extrairImagensDebugMeta", () => {
+    it("deve retornar lista vazia quando o objeto global não contiver _sentryDebugIds nem _debugIds", () => {
+      const quadros = [{ filename: "https://arestaclimb.com/assets/landing.js" }];
+      expect(extrairImagensDebugMeta(quadros, {})).toEqual([]);
+      expect(extrairImagensDebugMeta(quadros, null)).toEqual([]);
+    });
+
+    it("deve retornar lista vazia quando quadros da exceção forem vazios ou nulos", () => {
+      const globalObj = {
+        _sentryDebugIds: {
+          "Error\n    at https://arestaclimb.com/assets/landing.js:1:1": "uuid-123",
+        },
+      };
+      expect(extrairImagensDebugMeta([], globalObj)).toEqual([]);
+      expect(extrairImagensDebugMeta(null, globalObj)).toEqual([]);
+    });
+
+    it("deve mapear pilhas V8 e Firefox/Safari associando debug_id ao code_file correto", () => {
+      const globalObj = {
+        _sentryDebugIds: {
+          "Error\n    at https://arestaclimb.com/assets/landing.js:1:1": "uuid-landing-v8",
+          "landingInit@https://arestaclimb.com/assets/editor.js:2:5": "uuid-editor-fx",
+        },
+      };
+
+      const quadros = [
+        { filename: "https://arestaclimb.com/assets/landing.js" },
+        { filename: "https://arestaclimb.com/assets/editor.js" },
+      ];
+
+      const imagens = extrairImagensDebugMeta(quadros, globalObj);
+      expect(imagens).toEqual([
+        {
+          type: "sourcemap",
+          code_file: "https://arestaclimb.com/assets/landing.js",
+          debug_id: "uuid-landing-v8",
+        },
+        {
+          type: "sourcemap",
+          code_file: "https://arestaclimb.com/assets/editor.js",
+          debug_id: "uuid-editor-fx",
+        },
+      ]);
+    });
+
+    it("deve deduplicar entradas quando múltiplos quadros pertencerem ao mesmo arquivo", () => {
+      const globalObj = {
+        _sentryDebugIds: {
+          "Error\n    at https://arestaclimb.com/assets/landing.js:1:1": "uuid-landing",
+        },
+      };
+
+      const quadros = [
+        { filename: "https://arestaclimb.com/assets/landing.js" },
+        { filename: "https://arestaclimb.com/assets/landing.js" },
+      ];
+
+      const imagens = extrairImagensDebugMeta(quadros, globalObj);
+      expect(imagens).toHaveLength(1);
+      expect(imagens[0].debug_id).toBe("uuid-landing");
+    });
+
+    it("deve ignorar entradas inválidas em _sentryDebugIds e quadros sem filename", () => {
+      const globalObj = {
+        _sentryDebugIds: {
+          "LinhaInvalidaSemStack": "uuid-invalido",
+          "Error\n    at https://arestaclimb.com/assets/valido.js:1:1": 12345, // debugId não é string
+          "Error\n    at https://arestaclimb.com/assets/vazio.js:1:1": "", // debugId vazio
+          "Error\n    at https://arestaclimb.com/assets/ok.js:1:1": "uuid-ok",
+        },
+      };
+
+      const quadros = [
+        null,
+        { filename: "" },
+        { filename: "https://arestaclimb.com/assets/ok.js" },
+        { filename: "https://arestaclimb.com/assets/sem-debug-id.js" },
+      ];
+
+      const imagens = extrairImagensDebugMeta(quadros, globalObj);
+      expect(imagens).toEqual([
+        {
+          type: "sourcemap",
+          code_file: "https://arestaclimb.com/assets/ok.js",
+          debug_id: "uuid-ok",
+        },
+      ]);
+    });
+
+    it("deve suportar _debugIds como fonte alternativa e ignorar arquivos não presentes nos quadros da exceção", () => {
+      const globalObj = {
+        _debugIds: {
+          "Error\n    at https://arestaclimb.com/assets/landing.js:1:1": "uuid-from-debugids",
+          "Error\n    at https://arestaclimb.com/assets/outro.js:1:1": "uuid-outro",
+        },
+      };
+
+      const quadros = [{ filename: "https://arestaclimb.com/assets/landing.js" }];
+      const imagens = extrairImagensDebugMeta(quadros, globalObj);
+      expect(imagens).toEqual([
+        {
+          type: "sourcemap",
+          code_file: "https://arestaclimb.com/assets/landing.js",
+          debug_id: "uuid-from-debugids",
+        },
+      ]);
+    });
+  });
+
   describe("enviarExcecaoSentryWeb", () => {
     it("deve operar em modo no-op (retornando false) quando nenhum DSN estiver configurado", async () => {
-      const fetchSpy = vi.fn();
+      let chamou = false;
+      const fetchFake = async () => {
+        chamou = true;
+        return { ok: true, status: 200 };
+      };
       const enviado = await enviarExcecaoSentryWeb(new Error("Erro sem DSN"), {
         dsn: "",
-        fetchImpl: fetchSpy,
+        fetchImpl: fetchFake,
       });
       expect(enviado).toBe(false);
-      expect(fetchSpy).not.toHaveBeenCalled();
+      expect(chamou).toBe(false);
     });
 
     it("deve ignorar erros de fetch quando o navegador estiver offline (navigator.onLine === false)", async () => {
-      const fetchSpy = vi.fn();
+      let chamou = false;
+      const fetchFake = async () => {
+        chamou = true;
+        return { ok: true, status: 200 };
+      };
       const enviado = await enviarExcecaoSentryWeb(new TypeError("Failed to fetch"), {
         dsn: "https://pub123@o1.ingest.sentry.io/99",
         estaOnline: false,
-        fetchImpl: fetchSpy,
+        fetchImpl: fetchFake,
       });
       expect(enviado).toBe(false);
-      expect(fetchSpy).not.toHaveBeenCalled();
+      expect(chamou).toBe(false);
     });
 
     it("deve enviar envelope para o Sentry quando DSN for válido e erro for uma instância de Error ou string", async () => {
       const chamadas = [];
-      const fetchFake = vi.fn(async (url, init) => {
+      const fetchFake = async (url, init) => {
         chamadas.push({ url, init });
         return { ok: true, status: 200 };
-      });
+      };
 
       const erro = new TypeError("Cannot read properties of null");
       erro.stack = "TypeError: Cannot read properties of null\n    at initShowcase (https://arestaclimb.com/src/landing.js:79:12)";
@@ -158,10 +278,66 @@ describe("telemetria.js - Monitoramento de Exceções Client-Side (Sentry Envelo
       expect(itemEvento.exception.values[0].stacktrace.frames.length).toBe(1);
     });
 
-    it("deve enviar envelope para erro em formato de string sem stacktrace e tratar falha de rede no próprio fetch do Sentry", async () => {
-      const fetchQueFalha = vi.fn(async () => {
-        throw new Error("Sentry indisponível");
+    it("deve incluir debug_meta.images no envelope quando houver Debug IDs correspondentes no ambiente global", async () => {
+      const chamadas = [];
+      const fetchFake = async (url, init) => {
+        chamadas.push({ url, init });
+        return { ok: true, status: 200 };
+      };
+
+      window._sentryDebugIds = {
+        "Error\n    at https://arestaclimb.com/assets/landing.js:1:1": "debug-uuid-456",
+      };
+
+      const erro = new Error("Erro com Source Map");
+      erro.stack = "Error: Erro com Source Map\n    at https://arestaclimb.com/assets/landing.js:42:10";
+
+      const enviado = await enviarExcecaoSentryWeb(erro, {
+        dsn: "https://pub123@o1.ingest.sentry.io/99",
+        fetchImpl: fetchFake,
       });
+
+      expect(enviado).toBe(true);
+      expect(chamadas.length).toBe(1);
+
+      const linhas = chamadas[0].init.body.split("\n");
+      const payloadEvento = JSON.parse(linhas[2]);
+      expect(payloadEvento.debug_meta).toEqual({
+        images: [
+          {
+            type: "sourcemap",
+            code_file: "https://arestaclimb.com/assets/landing.js",
+            debug_id: "debug-uuid-456",
+          },
+        ],
+      });
+    });
+
+    it("não deve incluir o campo debug_meta quando não houver Debug IDs correspondentes", async () => {
+      const chamadas = [];
+      const fetchFake = async (url, init) => {
+        chamadas.push({ url, init });
+        return { ok: true, status: 200 };
+      };
+
+      const erro = new Error("Erro sem Source Map");
+      erro.stack = "Error: Erro sem Source Map\n    at https://arestaclimb.com/assets/landing.js:42:10";
+
+      const enviado = await enviarExcecaoSentryWeb(erro, {
+        dsn: "https://pub123@o1.ingest.sentry.io/99",
+        fetchImpl: fetchFake,
+      });
+
+      expect(enviado).toBe(true);
+      const linhas = chamadas[0].init.body.split("\n");
+      const payloadEvento = JSON.parse(linhas[2]);
+      expect(payloadEvento.debug_meta).toBeUndefined();
+    });
+
+    it("deve enviar envelope para erro em formato de string sem stacktrace e tratar falha de rede no próprio fetch do Sentry", async () => {
+      const fetchQueFalha = async () => {
+        throw new Error("Sentry indisponível");
+      };
 
       const enviadoFalha = await enviarExcecaoSentryWeb("Rejeição textual", {
         dsn: "https://pub123@o1.ingest.sentry.io/99",
@@ -170,7 +346,7 @@ describe("telemetria.js - Monitoramento de Exceções Client-Side (Sentry Envelo
       });
       expect(enviadoFalha).toBe(false);
 
-      const fetchOk = vi.fn(async () => ({ ok: true, status: 200 }));
+      const fetchOk = async () => ({ ok: true, status: 200 });
       const enviadoString = await enviarExcecaoSentryWeb("Rejeição simples", {
         dsn: "https://pub123@o1.ingest.sentry.io/99",
         estaOnline: true,
@@ -183,10 +359,10 @@ describe("telemetria.js - Monitoramento de Exceções Client-Side (Sentry Envelo
   describe("inicializarMonitoramentoErrosSentry", () => {
     it("deve registrar listeners de error e unhandledrejection e despachar eventos ao Sentry", async () => {
       const envelopes = [];
-      const fetchFake = vi.fn(async (url, init) => {
+      const fetchFake = async (url, init) => {
         envelopes.push({ url, body: init.body });
         return { ok: true, status: 200 };
-      });
+      };
 
       window.__ARESTA_SENTRY_DSN__ = "https://pub999@o1.ingest.sentry.io/777";
 
@@ -226,6 +402,37 @@ describe("telemetria.js - Monitoramento de Exceções Client-Side (Sentry Envelo
       const remover = inicializarMonitoramentoErrosSentry({ alvoGlobal: null });
       expect(typeof remover).toBe("function");
       expect(() => remover()).not.toThrow();
+    });
+
+    it("não deve registrar ouvintes duplicados se chamado múltiplas vezes para o mesmo alvoGlobal", () => {
+      const eventosRegistrados = [];
+      const mockAlvo = {
+        addEventListener: (tipo, listener) => {
+          eventosRegistrados.push({ tipo, listener });
+        },
+        removeEventListener: (tipo, listener) => {
+          const idx = eventosRegistrados.findIndex(
+            (e) => e.tipo === tipo && e.listener === listener
+          );
+          if (idx >= 0) eventosRegistrados.splice(idx, 1);
+        },
+      };
+
+      const removerPrimeiro = inicializarMonitoramentoErrosSentry({ alvoGlobal: mockAlvo });
+      expect(eventosRegistrados.length).toBe(2);
+
+      const removerSegundo = inicializarMonitoramentoErrosSentry({ alvoGlobal: mockAlvo });
+      expect(eventosRegistrados.length).toBe(2);
+
+      removerPrimeiro();
+      expect(eventosRegistrados.length).toBe(0);
+
+      removerSegundo();
+      expect(eventosRegistrados.length).toBe(0);
+
+      const removerTerceiro = inicializarMonitoramentoErrosSentry({ alvoGlobal: mockAlvo });
+      expect(eventosRegistrados.length).toBe(2);
+      removerTerceiro();
     });
   });
 });

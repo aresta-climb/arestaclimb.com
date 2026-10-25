@@ -13,15 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Generate Github App token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v3
         id: app-token
         with:
-          app-id: ${{ secrets.BOT_APP_ID }}
+          client-id: ${{ secrets.BOT_CLIENT_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
-          owner: aresta-climb
 
       - name: Repository Dispatch 
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@v4
         with:
           token: ${{ steps.app-token.outputs.token }}
           repository: aresta-climb/aresta_app

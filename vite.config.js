@@ -1,12 +1,27 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { plugin404 } from './src/vitePlugin404.js';
 import { pluginSitemap } from './src/vitePluginSitemap.js';
 
+if (process.env.CI && !process.env.SENTRY_AUTH_TOKEN && process.env.NODE_ENV !== 'test') {
+  throw new Error('[SENTRY] SENTRY_AUTH_TOKEN não configurado no CI! O build de produção não pode ser publicado sem Source Maps no Sentry.');
+}
+
 export default defineConfig({
   appType: 'mpa',
-  plugins: [plugin404(), pluginSitemap()],
+  plugins: [
+    plugin404(),
+    pluginSitemap(),
+    sentryVitePlugin({
+      org: 'aresta-climb',
+      project: 'arestaclimb-com',
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      silent: !process.env.CI,
+    }),
+  ],
   build: {
+    sourcemap: true,
     rollupOptions: {
       input: {
         index: resolve(__dirname, 'index.html'),

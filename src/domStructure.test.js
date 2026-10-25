@@ -267,5 +267,32 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(servingRobots).toContain('Disallow: /flatpak/');
     expect(servingRobots).toContain('Allow: /');
   });
+
+  it('nenhuma página HTML deve conter scripts externos do Sentry nem caractere BOM UTF-8', () => {
+    const paginasHtml = [
+      'index.html',
+      '404.html',
+      'app.html',
+      'comunidade.html',
+      'contato.html',
+      'download.html',
+      'editor.html',
+      'editor/beta/index.html',
+      'editor/beta/certificado-instalado/index.html',
+      'termos-de-uso.html',
+      'politica-de-privacidade.html',
+      'politica-de-privacidade-editor.html',
+      'privacidade-contribuidores.html',
+      'termos-de-uso-fixlog.html',
+      'politica-de-privacidade-fixlog.html'
+    ];
+
+    for (const arquivo of paginasHtml) {
+      const conteudo = fs.readFileSync(arquivo, 'utf8');
+      expect(conteudo.startsWith('\uFEFF'), `${arquivo} não deve começar com caractere BOM UTF-8`).toBe(false);
+      expect(conteudo, `${arquivo} não deve carregar script da CDN do Sentry`).not.toContain('sentry-cdn.com');
+      expect(conteudo, `${arquivo} não deve ter tag de script apontando para o Sentry`).not.toMatch(/<script\s+[^>]*src="[^"]*sentry[^"]*"/i);
+    }
+  });
 });
 
