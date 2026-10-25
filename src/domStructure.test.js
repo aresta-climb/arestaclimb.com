@@ -78,8 +78,8 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
       'politica-de-privacidade-editor.html',
       'privacidade-contribuidores.html',
       'contato.html',
-      'termos-de-uso-fixlog.html',
-      'politica-de-privacidade-fixlog.html',
+      'termos-de-uso-fixalog.html',
+      'politica-de-privacidade-fixalog.html',
       'comunidade.html',
       '404.html',
       'editor/beta/index.html'
@@ -94,23 +94,23 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     });
   });
 
-  it('termos-de-uso-fixlog.html deve conter estrutura semântica correta e apontar para o markdown do FixLog', () => {
-    const html = fs.readFileSync('termos-de-uso-fixlog.html', 'utf8');
+  it('termos-de-uso-fixalog.html deve conter estrutura semântica correta e apontar para o markdown do Fixalog', () => {
+    const html = fs.readFileSync('termos-de-uso-fixalog.html', 'utf8');
 
-    expect(html).toContain('data-doc="/docs/termos-de-uso-fixlog.md"');
+    expect(html).toContain('data-doc="/docs/termos-de-uso-fixalog.md"');
     expect(html).toContain('id="markdown-container"');
     expect(html).toContain('id="themeToggle"');
-    expect(html).toContain('FixLog');
+    expect(html).toContain('Fixalog');
     expect(html).toContain('src="/src/main.js"');
   });
 
-  it('politica-de-privacidade-fixlog.html deve conter estrutura semântica correta e apontar para o markdown do FixLog', () => {
-    const html = fs.readFileSync('politica-de-privacidade-fixlog.html', 'utf8');
+  it('politica-de-privacidade-fixalog.html deve conter estrutura semântica correta e apontar para o markdown do Fixalog', () => {
+    const html = fs.readFileSync('politica-de-privacidade-fixalog.html', 'utf8');
 
-    expect(html).toContain('data-doc="/docs/politica-de-privacidade-fixlog.md"');
+    expect(html).toContain('data-doc="/docs/politica-de-privacidade-fixalog.md"');
     expect(html).toContain('id="markdown-container"');
     expect(html).toContain('id="themeToggle"');
-    expect(html).toContain('FixLog');
+    expect(html).toContain('Fixalog');
     expect(html).toContain('src="/src/main.js"');
   });
 
@@ -126,11 +126,11 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(html).toContain('src="/src/notFound.js"');
   });
 
-  it('vite.config.js deve registrar os pontos de entrada MPA do FixLog, Comunidade e da página 404, além dos plugins 404 e Sitemap', () => {
+  it('vite.config.js deve registrar os pontos de entrada MPA do Fixalog, Comunidade e da página 404, além dos plugins 404 e Sitemap', () => {
     const configContent = fs.readFileSync('vite.config.js', 'utf8');
 
-    expect(configContent).toContain('termosDeUsoFixlog:');
-    expect(configContent).toContain('politicaDePrivacidadeFixlog:');
+    expect(configContent).toContain('termosDeUsoFixalog:');
+    expect(configContent).toContain('politicaDePrivacidadeFixalog:');
     expect(configContent).toContain('comunidade:');
     expect(configContent).toContain('notFound:');
     expect(configContent).toContain("appType: 'mpa'");
@@ -149,8 +149,8 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
       'politica-de-privacidade-editor.html',
       'privacidade-contribuidores.html',
       'contato.html',
-      'termos-de-uso-fixlog.html',
-      'politica-de-privacidade-fixlog.html',
+      'termos-de-uso-fixalog.html',
+      'politica-de-privacidade-fixalog.html',
       'comunidade.html',
       '404.html',
       'editor/beta/index.html',
@@ -193,8 +193,8 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
       { arquivo: 'politica-de-privacidade.html', urlCanonica: 'https://arestaclimb.com/politica-de-privacidade' },
       { arquivo: 'politica-de-privacidade-editor.html', urlCanonica: 'https://arestaclimb.com/politica-de-privacidade-editor' },
       { arquivo: 'privacidade-contribuidores.html', urlCanonica: 'https://arestaclimb.com/privacidade-contribuidores' },
-      { arquivo: 'termos-de-uso-fixlog.html', urlCanonica: 'https://arestaclimb.com/termos-de-uso-fixlog' },
-      { arquivo: 'politica-de-privacidade-fixlog.html', urlCanonica: 'https://arestaclimb.com/politica-de-privacidade-fixlog' }
+      { arquivo: 'termos-de-uso-fixalog.html', urlCanonica: 'https://arestaclimb.com/termos-de-uso-fixalog' },
+      { arquivo: 'politica-de-privacidade-fixalog.html', urlCanonica: 'https://arestaclimb.com/politica-de-privacidade-fixalog' }
     ];
 
     for (const { arquivo, urlCanonica } of paginasIndexaveis) {
@@ -283,8 +283,8 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
       'politica-de-privacidade.html',
       'politica-de-privacidade-editor.html',
       'privacidade-contribuidores.html',
-      'termos-de-uso-fixlog.html',
-      'politica-de-privacidade-fixlog.html'
+      'termos-de-uso-fixalog.html',
+      'politica-de-privacidade-fixalog.html'
     ];
 
     for (const arquivo of paginasHtml) {

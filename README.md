@@ -23,8 +23,8 @@ Este projeto usa a arquitetura de Múltiplas Páginas (MPA) configurada no Vite.
 - `/termos-de-uso` ➔ Renderiza `termos-de-uso.md`
 - `/politica-de-privacidade` ➔ Renderiza `politica-de-privacidade.md`
 - `/politica-de-privacidade-editor` ➔ Renderiza `politica-de-privacidade-editor.md`
-- `/termos-de-uso-fixlog` ➔ Renderiza `termos-de-uso-fixlog.md`
-- `/politica-de-privacidade-fixlog` ➔ Renderiza `politica-de-privacidade-fixlog.md`
+- `/termos-de-uso-fixalog` ➔ Renderiza `termos-de-uso-fixalog.md`
+- `/politica-de-privacidade-fixalog` ➔ Renderiza `politica-de-privacidade-fixalog.md`
 - `/privacidade-contribuidores` ➔ Renderiza `privacidade-contribuidores.md`
 - `/contato` ➔ Renderiza `contato.md`
 - `/comunidade` ➔ Redirecionamento para a comunidade oficial no WhatsApp (`noindex`)

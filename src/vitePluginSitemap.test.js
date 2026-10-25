@@ -64,8 +64,8 @@ describe('vitePluginSitemap — Geração Automatizada de Sitemap XML', () => {
         path.resolve('editor.html'),
         path.resolve('editor/beta/index.html'),
         path.resolve('editor/beta/certificado-instalado/index.html'),
-        path.resolve('termos-de-uso-fixlog.html'),
-        path.resolve('politica-de-privacidade-fixlog.html'),
+        path.resolve('termos-de-uso-fixalog.html'),
+        path.resolve('politica-de-privacidade-fixalog.html'),
         path.resolve('comunidade.html'),
         path.resolve('404.html')
       ];
@@ -83,10 +83,10 @@ describe('vitePluginSitemap — Geração Automatizada de Sitemap XML', () => {
         'https://arestaclimb.com/editor/beta',
         'https://arestaclimb.com/politica-de-privacidade',
         'https://arestaclimb.com/politica-de-privacidade-editor',
-        'https://arestaclimb.com/politica-de-privacidade-fixlog',
+        'https://arestaclimb.com/politica-de-privacidade-fixalog',
         'https://arestaclimb.com/privacidade-contribuidores',
         'https://arestaclimb.com/termos-de-uso',
-        'https://arestaclimb.com/termos-de-uso-fixlog'
+        'https://arestaclimb.com/termos-de-uso-fixalog'
       ];
 
       for (const url of urlsEsperadas) {

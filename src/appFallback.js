@@ -17,8 +17,8 @@ export const ROTAS_RESERVADAS = [
   '/politica-de-privacidade',
   '/politica-de-privacidade-editor',
   '/privacidade-contribuidores',
-  '/termos-de-uso-fixlog',
-  '/politica-de-privacidade-fixlog'
+  '/termos-de-uso-fixalog',
+  '/politica-de-privacidade-fixalog'
 ];
 
 /**

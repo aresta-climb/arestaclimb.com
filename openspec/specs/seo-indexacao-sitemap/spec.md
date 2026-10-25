@@ -11,7 +11,7 @@ O sistema DEVE (SHALL) gerar automaticamente o arquivo `sitemap.xml` no protocol
 
 #### Scenario: Emissão do sitemap.xml com todas as páginas públicas indexáveis
 - **WHEN** o processo de empacotamento de produção (`build`) ou requisição a `/sitemap.xml` em desenvolvimento/preview é executado
-- **THEN** o sistema gera um documento XML válido contendo exatamente as URLs canônicas de `/`, `/app`, `/editor`, `/editor/beta`, `/contato`, `/termos-de-uso`, `/politica-de-privacidade`, `/politica-de-privacidade-editor`, `/privacidade-contribuidores`, `/termos-de-uso-fixlog` e `/politica-de-privacidade-fixlog`
+- **THEN** o sistema gera um documento XML válido contendo exatamente as URLs canônicas de `/`, `/app`, `/editor`, `/editor/beta`, `/contato`, `/termos-de-uso`, `/politica-de-privacidade`, `/politica-de-privacidade-editor`, `/privacidade-contribuidores`, `/termos-de-uso-fixalog` e `/politica-de-privacidade-fixalog`
 
 #### Scenario: Exclusão automática de páginas marcadas com noindex do sitemap
 - **WHEN** uma página HTML da configuração MPA possui a meta tag `<meta name="robots" content="noindex...">` (como `404.html`, `download.html`, `comunidade.html` e `editor/beta/certificado-instalado/index.html`)

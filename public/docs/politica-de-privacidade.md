@@ -35,15 +35,22 @@ entanto, é importante ressaltar que:
   país e cidade), sem acessar o GPS do seu dispositivo e sem qualquer vínculo
   com sua identidade.
 
-## Log Data (Dados de Registro)
+## Log Data e Monitoramento de Falhas (Crashlytics e Sentry)
 
-Queremos informar que, sempre que você usar nosso Serviço e em caso de erro no
-aplicativo, podemos coletar dados e informações (através de produtos de
-terceiros, se aplicável) no seu telefone, chamados de Log Data. Esses Dados de
-Registro podem incluir informações como o endereço de Protocolo de Internet
-("IP") do seu dispositivo, nome do dispositivo, versão do sistema operacional, a
-configuração do aplicativo ao utilizar nosso Serviço, a hora e a data do seu uso
-do Serviço e outras estatísticas estritamente voltadas para a correção de bugs.
+Queremos informar que, sempre que você usar nosso Serviço e em caso de erro ou
+falha inesperada no aplicativo ou no portal web, coletamos dados técnicos de
+diagnóstico (chamados de _Log Data_) por meio do **Firebase Crashlytics** e do
+**Sentry**. Esses Dados de Registro incluem informações estritamente técnicas,
+como pilhas de execução do erro (_stack traces_), trilhas contextuais de ações
+anteriores à falha (_breadcrumbs_ de navegação e operação), modelo do
+dispositivo, versão do sistema operacional, versão do aplicativo, data e hora do
+evento e o endereço de Protocolo de Internet ("IP") temporário da conexão (usado
+apenas no transporte da requisição, sem associação à sua identidade pessoal).
+
+Quando o dispositivo está sem sinal na montanha, os relatórios de falha são
+armazenados temporariamente em fila local no aparelho e transmitidos de forma
+automática assim que a conectividade é restabelecida, com a finalidade exclusiva
+de diagnosticar e corrigir bugs rapidamente.
 
 ## Envio de Feedbacks e Sugestões
 
@@ -76,6 +83,7 @@ provedores de serviços terceirizados usados pelo aplicativo:
 - [Firebase Crashlytics](https://firebase.google.com/support/privacy)
 - [Firebase Remote Config](https://firebase.google.com/support/privacy)
 - [Firebase App Check](https://firebase.google.com/support/privacy)
+- [Sentry](https://sentry.io/privacy/)
 - [GitHub](https://docs.github.com/pt/site-policy/privacy-policies/github-general-privacy-statement)
 - [Supabase](https://supabase.com/privacy)
 
@@ -111,9 +119,9 @@ Nós reteremos os dados coletados apenas pelo tempo necessário para cumprir os
 propósitos para os quais foram coletados, como fornecer o Serviço, melhorar a
 experiência do usuário e cumprir com obrigações legais. Os dados analíticos e de
 relatórios de falhas (que já nascem anônimos na coleta) são retidos pelas
-ferramentas de terceiros (como o Firebase) de acordo com suas políticas padrão
-(geralmente variando de 90 dias a 14 meses), sendo permanentemente excluídos
-após esse período.
+ferramentas de terceiros (como o Firebase e o Sentry) de acordo com suas
+políticas padrão (geralmente variando de 90 dias a 14 meses), sendo
+permanentemente excluídos após esse período.
 
 ## Seus Direitos (LGPD)
 
@@ -135,4 +143,4 @@ para: **contato@arestaclimb.com**.
 
 ## Vigência
 
-Esta política entra em vigor a partir de 04 de Outubro de 2026.
+Esta política entra em vigor a partir de 25 de Outubro de 2026.

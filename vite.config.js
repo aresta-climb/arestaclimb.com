@@ -35,8 +35,8 @@ export default defineConfig({
         editor: resolve(__dirname, 'editor.html'),
         editorBeta: resolve(__dirname, 'editor/beta/index.html'),
         certificadoInstalado: resolve(__dirname, 'editor/beta/certificado-instalado/index.html'),
-        termosDeUsoFixlog: resolve(__dirname, 'termos-de-uso-fixlog.html'),
-        politicaDePrivacidadeFixlog: resolve(__dirname, 'politica-de-privacidade-fixlog.html'),
+        termosDeUsoFixalog: resolve(__dirname, 'termos-de-uso-fixalog.html'),
+        politicaDePrivacidadeFixalog: resolve(__dirname, 'politica-de-privacidade-fixalog.html'),
         comunidade: resolve(__dirname, 'comunidade.html'),
         notFound: resolve(__dirname, '404.html')
       }
