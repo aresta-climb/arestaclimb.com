@@ -72,5 +72,11 @@ A hospedagem está configurada para aproveitar o Edge Global da Cloudflare, gara
 2. **Deploy Automático:**
    O deploy é automatizado através da integração direta com o **Cloudflare Pages**. Basta realizar o push para a branch `main` e o Cloudflare irá rodar o build e publicar o site na mesma hora.
 
+## 💜 Apoio Open Source — Sentry
+
+[![Monitorado com Sentry](https://img.shields.io/badge/Monitorado_com-Sentry-362D59?style=for-the-badge&logo=sentry&logoColor=white)](https://sentry.io/?utm_source=github&utm_medium=referral)
+
+O ecossistema **Aresta Climb** conta com o apoio oficial do **[Sentry](https://sentry.io/?utm_source=github&utm_medium=referral)** através do seu programa de incentivo a projetos Open Source (**Sponsored Business Plan**), garantindo observabilidade e estabilidade em todo o nosso ecossistema.
+
 ---
 *© 2026 Aresta Climb - Criado com foco na comunidade da escalada.*

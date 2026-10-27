@@ -32,6 +32,8 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(html).toContain('https://github.com/aresta-climb');
     expect(html).toContain('Mozilla Public License 2.0');
     expect(html).toContain('Open Database License 1.0');
+    expect(html).toContain('https://sentry.io/?utm_source=arestaclimb.com&utm_medium=referral');
+    expect(html).toContain('Sponsored Business Plan');
 
     // Ordem de apresentação: após #editor e antes de #faq
     const idxEditor = html.indexOf('id="editor"');
