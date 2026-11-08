@@ -236,12 +236,17 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     }
   });
 
-  it('o rodapé institucional de index.html deve conter links diretos para /editor/beta, /privacidade-contribuidores e /contato', () => {
+  it('o rodapé institucional de index.html deve conter links diretos para /editor/beta, /privacidade-contribuidores, /contato e badge do Sentry', () => {
     const html = fs.readFileSync('index.html', 'utf8');
 
     expect(html).toContain('href="/editor/beta"');
     expect(html).toContain('href="/privacidade-contribuidores"');
     expect(html).toContain('href="/contato"');
+
+    const idxFooter = html.indexOf('<footer class="site-footer">');
+    const idxSentry = html.indexOf('https://sentry.io/?utm_source=arestaclimb.com&utm_medium=referral');
+    expect(idxSentry).toBeGreaterThan(idxFooter);
+    expect(html).toContain('Monitorado com Sentry');
   });
 
   it('public/robots.txt deve permitir rastreamento e referenciar https://arestaclimb.com/sitemap.xml', () => {
