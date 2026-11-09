@@ -1,6 +1,6 @@
 # Princípios de Engenharia Aresta (`arestaclimb.com`)
 
-Para garantir que o nosso código, seja ele escrito por humanos ou por agentes autônomos de IA (como Google Antigravity e OPSX), se mantenha coeso, testável, sustentável e simples, adotamos oito princípios basilares e inegociáveis.
+Para garantir que o nosso código, seja ele escrito por humanos ou por agentes autônomos de IA (como Google Antigravity e OPSX), se mantenha coeso, testável, sustentável e simples, adotamos dez princípios basilares e inegociáveis.
 
 Estes princípios devem guiar toda e qualquer nova implementação, revisão ou refatoração no repositório web e de documentação legal.
 
@@ -44,7 +44,18 @@ A existência de código ou testes legados no repositório que ainda não sigam 
 - Agentes autônomos e desenvolvedores estão proibidos de imitar antipadrões presentes em arquivos vizinhos (como uso excessivo de `vi.spyOn`/`vi.fn` ad-hoc, *change-detector tests* ou identificadores em inglês).
 - Sempre que tocar em um arquivo ou módulo existente que viole este `AGENTS.md`, você DEVE refatorar o trecho e os testes afetados para que passem a seguir integralmente estes princípios.
 
-## VIII. Eficiência Client-Side First e Arquitetura Web Leve
+## VIII. Fail-Fast e Proibição de Fallbacks Legados ou Silenciosos
+O código DEVE operar por padrão sob a filosofia **Fail-Fast** (falhar cedo, de forma ruidosa e explícita) e realizar **cortes limpos** ao evoluir contratos, schemas e arquiteturas.
+- **Proibição de Fallbacks Legados por Padrão**: Quando um contrato, schema, formato de arquivo ou fluxo arquitetural for substituído, o caminho antigo DEVE ser integralmente removido na mesma alteração (migrando os dados existentes de uma só vez quando necessário). Por padrão, é proibido manter parâmetros opcionais legados, leitura dupla (*dual-read*) de formatos obsoletos ou ramificações de retrocompatibilidade.
+- **Proibição de Degradação Silenciosa e Engolimento de Erros**: É proibido usar blocos `try/catch` genéricos que engulam exceções (blocos vazios, retorno de valores vazios/padrão mágicos) para mascarar pré-condições violadas ou acoplamento indevido entre módulos. Se uma pré-condição, dependência ou invariante falhar, o sistema DEVE lançar um erro claro imediatamente para que a falha seja capturada nos testes, no CI ou no Sentry.
+- **Exceção Explícita (*Escape Hatch*)**: Fallbacks (sejam de compatibilidade ou dentro da lógica de negócios) e degradações graciosas **SÓ** podem ser implementados quando **explicitamente solicitados pelo usuário** para um caso específico. Agentes autônomos jamais devem introduzir fallbacks por iniciativa própria; na dúvida se um cenário exige fallback ou erro explícito, o padrão é falhar explicitamente ou perguntar ao usuário.
+
+## IX. Responsividade Inegociável da UI e Execução Pesada em Background (Orçamento de Meio Frame)
+A thread principal do navegador (Browser Main Thread / Event Loop) **JAMAIS** deve executar trabalho síncrono que exceda o orçamento de **meio frame (`~8ms` a 60fps / `~4ms` a 120fps)**, mantendo margem folgada abaixo do limite de um frame para evitar *jank* ou congelamento de animações e rolagem.
+- **Proibição de Bloqueio Síncrono na Main Thread**: Qualquer rotina que envolva rede (`fetch`), processamento de documentos extensos ou manipulação pesada deve ser executada de forma assíncrona e não bloqueante.
+- **Atualizações Coalescidas no DOM**: Mutações no DOM devem ser aplicadas de forma atômica, evitando *layout thrashing* ou múltiplas re-renderizações desnecessárias no mesmo quadro.
+
+## X. Eficiência Client-Side First e Arquitetura Web Leve
 Toda funcionalidade web deve ser projetada para **performance extrema, carregamento instantâneo na borda (Cloudflare Pages) e custo operacional mínimo**:
 - **Zero Frameworks Pesados**: Mantenha a arquitetura de Múltiplas Páginas (MPA) com Vite, Vanilla JS e CSS moderno.
 - **Delegação Client-Side First**: O processamento e a renderização (como conversão de documentos legais Markdown em tempo real via Marked.js, detecção inteligente de plataforma e geração de QR Codes/redirecionamentos) devem ocorrer inteiramente no navegador do usuário.
