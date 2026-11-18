@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://arestaclimb.com/sitemap.xml
+Sitemap: https://arestaclimb.com/croquis/sitemap.xml

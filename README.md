@@ -16,6 +16,7 @@ O site foi construído com foco em **performance extrema, tipografia moderna e i
 
 Este projeto usa a arquitetura de Múltiplas Páginas (MPA) configurada no Vite. As páginas disponíveis (pontos de entrada) são:
 - `/` ➔ Landing page oficial do app Aresta Climb (`index.html`)
+- `/croquis` (e `/croquis/<uid>/<slug>`, `/croquis/busca.json`, `/croquis/sitemap.xml`) ➔ Vitrine pública SSR de croquis servida na borda via Cloudflare Worker Route (`aresta-app-links`) sobre o D1 `aresta-catalogo`
 - `/app` (e alias `/download`) ➔ Smart Redirect para App Store / Google Play e Hub QR Code (`app.html`)
 - `/editor` ➔ Landing page e download do Editor Aresta Desktop (`editor.html`)
 - `/editor/beta` ➔ Canal Beta do Editor Aresta para Windows (`editor/beta/index.html`)
@@ -34,7 +35,8 @@ Os documentos legais de origem ficam na pasta `/public/docs/`. O arquivo JavaScr
 
 ## 🔍 SEO, Sitemap Automatizado e Subdomínios
 
-- **Geração Automática de `sitemap.xml` (`src/vitePluginSitemap.js`):** Durante o `npm run build` (e em tempo real em `GET /sitemap.xml` no modo dev/preview), o plugin do Vite inspeciona todas as entradas HTML de `vite.config.js`, ignora páginas com `<meta name="robots" content="noindex, nofollow">` e extrai automaticamente as URLs de `<link rel="canonical">` para emitir `dist/sitemap.xml`.
+- **Geração Automática de `sitemap.xml` (`src/vitePluginSitemap.js`):** Durante o `npm run build` (e em tempo real em `GET /sitemap.xml` no modo dev/preview), o plugin do Vite inspeciona todas as entradas HTML de `vite.config.js`, ignora páginas com `<meta name="robots" content="noindex, nofollow">` e extrai automaticamente as URLs de `<link rel="canonical">` para emitir `dist/sitemap.xml`. O `public/robots.txt` declara tanto `https://arestaclimb.com/sitemap.xml` quanto o sitemap dinâmico da vitrine `https://arestaclimb.com/croquis/sitemap.xml`.
+- **App Links / Universal Links (`.well-known/`):** `public/.well-known/assetlinks.json` e `public/.well-known/apple-app-site-association` (restrito a `/croquis/?*`) habilitam abertura nativa de URLs `/croquis/<uid>/<slug>` no aplicativo móvel mantendo páginas institucionais (`/`, `/editor`, `/termos-de-uso`) no navegador.
 - **Regras para Subdomínios na Cloudflare / Storage:**
   - **`serving.arestaclimb.com` (Storage / R2):** O arquivo de referência versionado em `public/serving-robots.txt` deve ser publicado como `robots.txt` na raiz do bucket `serving.arestaclimb.com`, permitindo que imagens vinculadas sejam indexadas (`Allow: /`), mas bloqueando arquivos de dados (`*.binarypb`, `*.yaml`, `*.yml`) e pastas de instaladores (`/editor-macos/`, `/editor-beta/`, `/flatpak/`).
   - **`previa.arestaclimb.com` e `feedback.arestaclimb.com` (APIs):** Devem responder com cabeçalho HTTP `X-Robots-Tag: noindex, nofollow` (via Cloudflare Response Header Transform Rule) e/ou `robots.txt` com `Disallow: /`.

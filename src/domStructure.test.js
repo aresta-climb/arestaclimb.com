@@ -16,10 +16,11 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(html).toContain('id="usar"');
     expect(html).toContain('id="qr-modal"');
 
-    // Botões das lojas e WhatsApp
+    // Botões das lojas, Vitrine de Croquis e WhatsApp
     expect(html).toContain('https://apps.apple.com/app/id6776467893');
     expect(html).toContain('https://play.google.com/store/apps/details?id=app.escalada.croquis');
     expect(html).toContain('https://chat.whatsapp.com/JmxWeLSmGTT66AREtrKyjA');
+    expect(html).toContain('href="/croquis"');
     expect(html).toContain('href="/editor"');
 
     // Conquistadores podem aprovar ou rejeitar mudanças nos próprios croquis
@@ -53,6 +54,7 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(html).toContain('https://serving.arestaclimb.com/flatpak/com.arestaclimb.Editor.flatpakref');
     expect(html).toContain('https://flatpak.org/setup/');
     expect(html).toContain('id="themeToggle"');
+    expect(html).toContain('href="/croquis"');
     expect(html).toContain('href="/editor/beta"');
     expect(html).toContain('https://github.com/aresta-climb');
   });
@@ -64,6 +66,7 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(html).toContain('id="btn-ios"');
     expect(html).toContain('id="btn-android"');
     expect(html).toContain('id="themeToggle"');
+    expect(html).toContain('href="/croquis"');
     expect(html).toContain('https://github.com/aresta-climb');
   });
 
@@ -249,12 +252,23 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
     expect(html).toContain('Monitorado com Sentry');
   });
 
-  it('public/robots.txt deve permitir rastreamento e referenciar https://arestaclimb.com/sitemap.xml', () => {
+  it('public/robots.txt deve permitir rastreamento e referenciar sitemaps principal e de croquis', () => {
     const robots = fs.readFileSync('public/robots.txt', 'utf8');
 
     expect(robots).toContain('User-agent: *');
     expect(robots).toContain('Allow: /');
     expect(robots).toContain('Sitemap: https://arestaclimb.com/sitemap.xml');
+    expect(robots).toContain('Sitemap: https://arestaclimb.com/croquis/sitemap.xml');
+  });
+
+  it('public/.well-known/apple-app-site-association deve restringir Universal Links a /croquis/*', () => {
+    const aasa = JSON.parse(
+      fs.readFileSync('public/.well-known/apple-app-site-association', 'utf8')
+    );
+    const detalhe = aasa.applinks.details[0];
+    expect(detalhe.appIDs).toContain('Z74K7R3WU7.app.escalada.croquis');
+    expect(detalhe.paths).toEqual(['/croquis/?*']);
+    expect(detalhe.components).toEqual([{ '/': '/croquis/?*' }]);
   });
 
   it('public/serving-robots.txt deve permitir imagens e bloquear arquivos .binarypb, .yaml/.yml e pastas de instaladores', () => {

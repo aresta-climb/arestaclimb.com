@@ -6,11 +6,11 @@
         "appIDs": ["Z74K7R3WU7.app.escalada.croquis"],
         "components": [
           {
-            "/": "/*"
+            "/": "/croquis/?*"
           }
         ],
         "appID": "Z74K7R3WU7.app.escalada.croquis",
-        "paths": ["/*"]
+        "paths": ["/croquis/?*"]
       }
     ]
   }
