@@ -313,5 +313,43 @@ describe('Estrutura Semântica e Integridade das Páginas HTML', () => {
       expect(conteudo, `${arquivo} não deve ter tag de script apontando para o Sentry`).not.toMatch(/<script\s+[^>]*src="[^"]*sentry[^"]*"/i);
     }
   });
+
+  it('public/favicon.svg, public/favicon.ico e todas as 15 paginas HTML devem usar o simbolo oficial do Aresta', () => {
+    const faviconSvg = fs.readFileSync('public/favicon.svg', 'utf8');
+    expect(faviconSvg).toContain('#ea5341');
+    expect(faviconSvg).not.toContain('#863bff');
+    expect(fs.existsSync('public/favicon.ico')).toBe(true);
+
+    const paginasHtml = [
+      'index.html',
+      '404.html',
+      'app.html',
+      'comunidade.html',
+      'contato.html',
+      'download.html',
+      'editor.html',
+      'editor/beta/index.html',
+      'editor/beta/certificado-instalado/index.html',
+      'termos-de-uso.html',
+      'politica-de-privacidade.html',
+      'politica-de-privacidade-editor.html',
+      'privacidade-contribuidores.html',
+      'termos-de-uso-fixalog.html',
+      'politica-de-privacidade-fixalog.html'
+    ];
+
+    for (const arquivo of paginasHtml) {
+      const html = fs.readFileSync(arquivo, 'utf8');
+      expect(html, `${arquivo} deve referenciar /favicon.svg`).toContain(
+        '<link rel="icon" type="image/svg+xml" href="/favicon.svg">'
+      );
+      expect(html, `${arquivo} deve referenciar /assets/logo_app.png`).toContain(
+        '<link rel="icon" type="image/png" href="/assets/logo_app.png">'
+      );
+      expect(html, `${arquivo} deve declarar apple-touch-icon`).toContain(
+        '<link rel="apple-touch-icon" href="/assets/logo_app.png">'
+      );
+    }
+  });
 });
 
